@@ -50,7 +50,7 @@ class wordshedule extends CI_Controller {
 		}
                 
 	}
-        function show_all($filt=NULL){
+        function show_all($search_date=NULL){
             $this->load->library('table');
             $template = array(
         'table_open'            => '<table class=table>',
@@ -74,12 +74,13 @@ class wordshedule extends CI_Controller {
 );
             
             $this->table->set_template($template);
-            if($filt==NULL){
+            if($search_date==NULL){
                  $r=$this->work->allwork();
-            echo $this->table->generate($r);
+            
             }else{
-                //
+                $r=$this->work->allwork_bydate($search_date);
             }
+            echo $this->table->generate($r);
            
         }
 	

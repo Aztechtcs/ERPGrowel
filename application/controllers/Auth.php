@@ -33,11 +33,12 @@ class Auth extends CI_Controller {
     }
     
     function report($search_date=NULL){
-        $this->load->library('table');
+       /* $this->load->library('table');
         $db=$this->work->allwork_bydate($search_date);
          //echo $this->db->last_query();
-        echo $this->table->generate($db);
+        echo $this->table->generate($db);*/
         //var_dump($db->result());
+        $this->load->view('workshedule/deshboard_report');
     }
     
     function dis(){

@@ -85,7 +85,7 @@
           </li>
           <li class='launcher dropdown hover'>
             <i class='icon-flag'></i>
-            <a href='#'>Reports</a>
+            <a href='<?php echo site_url('Auth/report'); ?>'>Reports</a>
             <ul class='dropdown-menu'>
               <li class='dropdown-header'>Launcher description</li>
               <li>
