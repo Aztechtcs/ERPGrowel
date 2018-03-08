@@ -4,7 +4,9 @@
         <div class='panel panel-default'>
           <div class='panel-heading'>
             <i class='icon-beer icon-large'></i>
-            <p id="today">today</p>
+            <a href=# onclick="s_alldetail('<?php echo date("y-m-d"); ?>')"><?php echo date("y-m-d"); ?></a>
+           
+            
             <div class='panel-tools'>
               <div class='btn-group'>
                 <a class='btn' href='#'>
@@ -102,7 +104,7 @@ _______________________________________________________
 <script src="<?php echo site_url(); ?>/js/jquery-3.3.1.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 <script>
-
+/*
 function adjx(){
 	$.ajax({
 		type:"get",
@@ -114,8 +116,9 @@ function adjx(){
 		}).fail(function(data){
 			$("#success").append('faillll'+ data);
 		}); 
-}
+}*/
 /*FOR SHOW ALL UNCOMPLETE DATA*/
+/*
 function s_hall(){
 	$.ajax({
 		type:"get",
@@ -129,13 +132,13 @@ function s_hall(){
 	});
 	
 }
-
+*/
 function s_alldetail(srch){
 	$.ajax({
 		type:"get",
-		url:"<?php echo site_url(); ?>wordshedule/show_all/".srch,
+		url:"<?php echo site_url(); ?>wordshedule/show_all/" + srch,
 		data:{id:'suc'},
-		//success:$("#tbl").load({"<?php echo site_url(); ?>wordshedule/show/uncomplete/"})
+		//success:$("#tbl").load({"<?php //echo site_url(); ?>wordshedule/show/uncomplete/"})
 	}).done(function(data2){
 		$("#tbl").html(data2)
 	}).fail(function(){
@@ -145,9 +148,11 @@ function s_alldetail(srch){
 }
 
 $("document").ready(function(){
-s_alldetail(2018);
+var tx='2018';
+
+s_alldetail(tx)
 	//s_hall()
-	$("#addword").click(function(){
+	/* $("#addword").click(function(){
 		$("#success").append('success click <br>');
 		if($("#word2").val()==''){
 			$("#success").append('value is empty  <br>');
@@ -159,8 +164,8 @@ s_alldetail(2018);
 			
 		}
 	});
-        $("#today").click(function(){
-            s_alldetail('2018')
+        $("#today2").click(function(){
+            s_alldetail(tx);
 		$("#success").append('success click <br>');
 		if($("#word2").val()==''){
 			$("#success").append('value is empty  <br>');
@@ -171,7 +176,7 @@ s_alldetail(2018);
 			$("#word2").val('');
 			
 		}
-	});
+	}); */
         
 });
 
