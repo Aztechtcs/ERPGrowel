@@ -32,7 +32,9 @@ class Auth extends CI_Controller {
                 
     }
     
-    
+    function demo(){
+        var_dump($this->work->allwork_bydate('2018'));
+    }
     
     function dis(){
         session_destroy();

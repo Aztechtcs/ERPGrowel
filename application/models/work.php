@@ -51,6 +51,14 @@ class work extends CI_Model{
 		//$where = "complete = 1";
 		return $re->result();
 	}
+        
+        function allwork_bydate($date=NULL){
+            $this->db->select('`id`, `start_time`, `end_time`, `work`,`complete`, timestampdiff(minute,`start_time`,`end_time`) as TotalconsumeTime');
+            //$this->db->join('','work.byuser_id=user_work.id');
+           $re= $this->db->get_where('work',array('byuser_id'=>$this->session->id,'start_time'=>$date.'%'));
+           return $re->result();
+           
+        }
 	
         function allwork($ALL=NULL){
             
