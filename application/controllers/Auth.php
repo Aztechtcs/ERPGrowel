@@ -32,8 +32,12 @@ class Auth extends CI_Controller {
                 
     }
     
-    function demo(){
-        var_dump($this->work->allwork_bydate('2018'));
+    function report($search_date=NULL){
+        $this->load->library('table');
+        $db=$this->work->allwork_bydate($search_date);
+         //echo $this->db->last_query();
+        echo $this->table->generate($db);
+        //var_dump($db->result());
     }
     
     function dis(){

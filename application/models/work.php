@@ -52,11 +52,12 @@ class work extends CI_Model{
 		return $re->result();
 	}
         
-        function allwork_bydate($date=NULL){
+        function allwork_bydate($keyword=NULL){
             $this->db->select('`id`, `start_time`, `end_time`, `work`,`complete`, timestampdiff(minute,`start_time`,`end_time`) as TotalconsumeTime');
             //$this->db->join('','work.byuser_id=user_work.id');
-           $re= $this->db->get_where('work',array('byuser_id'=>$this->session->id,'start_time'=>$date.'%'));
-           return $re->result();
+           $this->db->like('start_time', $keyword);
+            $re= $this->db->get_where('work',array('byuser_id'=>$this->session->id));
+           return $re;
            
         }
 	
