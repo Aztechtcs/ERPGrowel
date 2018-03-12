@@ -7,8 +7,9 @@
     <meta content='Nasir' name='author'>
     <meta content='' name='description'>
     <meta content='' name='keywords'>
-    <link href="<?php echo site_url('assets/stylesheets/application-a07755f5.css'); ?>" rel="stylesheet" type="text/css" /><link href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo site_url('assets/images/favicon.ico'); ?>" rel="icon" type="image/ico" />
+    <link href="<?php echo site_url('assets/stylesheets/application-a07755f5.css'); ?>" rel="stylesheet" type="text/css" />
+    <!--<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    --><link href="<?php echo site_url('assets/images/favicon.ico'); ?>" rel="icon" type="image/ico" />
   
   </head>
   <body class='main page'>
@@ -51,7 +52,8 @@
           <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
             <i class='icon-user'></i>
             <strong><?php echo $this->Extra_work->get_name(); ?></strong>
-            <img class="img-rounded" src="http://placehold.it/20x20/ccc/777" />
+            <!--<img class="img-rounded" src="http://placehold.it/20x20/ccc/777" />-->
+            <img class="img-rounded" src="#" />
             <b class='caret'></b>
           </a>
           <ul class='dropdown-menu'>
@@ -105,7 +107,7 @@
           </li>
           <li class='launcher'>
             <i class='icon-cloud'></i>
-            <a href='#'>Backup</a>
+            <a href='<?php echo site_url('Stock/'); ?>'>Stock Maintain</a>
           </li>
           <li class='launcher'>
             <i class='icon-bug'></i>

@@ -18,5 +18,16 @@ class Stock_model extends CI_Model{
         return $this->db->query($query);
     }
     
+    function get_stocktype(){
+        return $this->db->get('stock_type');
+    }
+    function put_stock($data){
+        //var_dump($data);
+       if($this->db->insert('stock_discription',$data)){
+           return true;
+       }
+       else{return false;}
+    }
+    
     
 }

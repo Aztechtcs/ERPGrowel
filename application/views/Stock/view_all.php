@@ -5,7 +5,7 @@
         <div class='panel panel-default'>
           <div class='panel-heading'>
             <i class='icon-beer icon-large'></i>
-            Running Task or Add new Task
+           Add Stcock
             <div class='panel-tools'>
               <div class='btn-group'>
                 <a class='btn' href='<?php echo site_url('Auth/pg'); ?>'>

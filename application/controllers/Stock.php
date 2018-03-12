@@ -54,7 +54,32 @@ class Stock extends CI_Controller {
     }
     
     function insert(){
-        
+        if(isset($_REQUEST['Confirm'])){
+           $data['stock_id']=$_REQUEST['ItemType'];
+           $data['discription']=$_REQUEST['discription'];
+           $data['used_by']=$_REQUEST['usedby'];
+           if($this->Stock_model->put_stock($data)){
+               echo "successfully inserted";
+               echo "<a href=".site_url('Stock/insert')."> Insert More</a>";
+               
+           }
+        }
+        else{
+        $DB=$this->Stock_model->get_stocktype();
+        $fl=$DB->result();
+        $key=array();
+        $val=array();
+        foreach($fl as $v){
+            array_push($key,$v->id);
+            array_push($val,$v->item);
+            //$f2=array($v->id =>$v->item);
+            //array_combine($rtn[$v->id], $rtn[$v->item);
+            //array_push($rtn,$f2);
+        }
+        $dbs['dbs']=array_combine($key,$val);
+       // var_dump($dbs);
+        $this->load->view('stock/add_stock',$dbs);
+    }
     }
     
     function add_stockdis(){//Stock discription
