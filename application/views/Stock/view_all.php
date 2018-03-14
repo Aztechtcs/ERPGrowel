@@ -62,7 +62,7 @@
         }*/
         $("document").ready(function(){
             dispstock()
-            showResult()
+            showResult('')
             function showResult(srch){
             $.ajax({
 			url:"<?php echo site_url('Stock/view_search'); ?>",
