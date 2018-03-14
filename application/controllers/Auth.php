@@ -31,6 +31,9 @@ class Auth extends CI_Controller {
                  
                 
     }
+    function complaints(){
+        $this->load->view('workshedule/add_complaints');
+    }
     
     function report($search_date=NULL){
        /* $this->load->library('table');
