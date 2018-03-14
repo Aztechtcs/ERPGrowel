@@ -8,8 +8,8 @@
     <meta content='' name='description'>
     <meta content='' name='keywords'>
     <link href="<?php echo site_url('assets/stylesheets/application-a07755f5.css'); ?>" rel="stylesheet" type="text/css" />
-    <!--<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    --><link href="<?php echo site_url('assets/images/favicon.ico'); ?>" rel="icon" type="image/ico" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo site_url('assets/images/favicon.ico'); ?>" rel="icon" type="image/ico" />
   
   </head>
   <body class='main page'>

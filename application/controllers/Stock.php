@@ -89,10 +89,24 @@ class Stock extends CI_Controller {
     function add_stocktype(){
         
     }
+    
+    function view_search(){
+        if(isset($_REQUEST['id'])){
+           // echo "hello view stock result";
+           // var_dump($_REQUEST);
+            echo $this->table->generate($this->Stock_model->viewall($_REQUEST['id']));
+        }else{
+            echo "No report";
+        }
+        
+    }
     function view_stock($usedby=NULL){
         if($usedby=='ALL'){
             $record=$this->Stock_model->viewall();
             echo $this->table->generate($record);
+        }else{
+            echo "filt";
+            //echo $this->table->generate($this->Stock_model->viewall($_REQUEST['id']));
         }
     }
     
