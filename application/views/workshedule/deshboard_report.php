@@ -4,7 +4,7 @@
         <div class='panel panel-default'>
           <div class='panel-heading'>
             <i class='icon-beer icon-large'></i>
-            <a href=# onclick="s_alldetail('<?php echo date("y-m-d"); ?>')"><?php echo date("y-m-d"); ?></a>
+            <a href=# onclick="s_alldetail('<?php echo date("Y-m-d"); ?>')"><?php echo date("Y-m-d"); ?></a>
            
             
             <div class='panel-tools'>
@@ -104,7 +104,7 @@ _______________________________________________________
 <script src="<?php echo site_url(); ?>/js/jquery-3.3.1.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
 <script>
-/*
+<?php /*
 function adjx(){
 	$.ajax({
 		type:"get",
@@ -116,9 +116,9 @@ function adjx(){
 		}).fail(function(data){
 			$("#success").append('faillll'+ data);
 		}); 
-}*/
+}*/ ?>
 /*FOR SHOW ALL UNCOMPLETE DATA*/
-/*
+<?php /*
 function s_hall(){
 	$.ajax({
 		type:"get",
@@ -132,12 +132,12 @@ function s_hall(){
 	});
 	
 }
-*/
+*/ ?>
 function s_alldetail(srch){
 	$.ajax({
 		type:"get",
 		url:"<?php echo site_url(); ?>wordshedule/show_all/" + srch,
-		data:{id:'suc'},
+		data:{id:srch},
 		//success:$("#tbl").load({"<?php //echo site_url(); ?>wordshedule/show/uncomplete/"})
 	}).done(function(data2){
 		$("#tbl").html(data2)
@@ -151,7 +151,7 @@ $("document").ready(function(){
 var tx='2018';
 
 s_alldetail(tx)
-	//s_hall()
+	<?php //s_hall()
 	/* $("#addword").click(function(){
 		$("#success").append('success click <br>');
 		if($("#word2").val()==''){
@@ -176,7 +176,7 @@ s_alldetail(tx)
 			$("#word2").val('');
 			
 		}
-	}); */
+	}); */ ?>
         
 });
 

@@ -46,6 +46,7 @@ class Auth extends CI_Controller {
     
     function dis(){
         session_destroy();
+        redirect('Auth/pg');
     }
     function index(){
         redirect('Auth/pg');
