@@ -31,6 +31,10 @@ class work extends CI_Model{
 		$this->db->where('id', $id);
 		$this->db->update('work',$data);	
 	}
+        function add_endtask_comments($id,$cmnt){
+            $data=array('work_id'=>$id,'comment'=>$cmnt);
+            $this->db->insert('work_answer',$data);
+        }
 	
 	function add($d){
 		$data['date']=date("y-m-d");

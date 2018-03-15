@@ -41,12 +41,20 @@ class wordshedule extends CI_Controller {
 		}
 	}
 	
-	function endtask($taskid){
+	function endtask($taskid=NULL){
+            $prm['work_id']=$taskid;
 		if($this->input->post()){
-			$this->work->update_endtasktime($taskid);
+                    $prm['work_id']=$this->input->post('work_id');
+                    echo "<br>with posted";
+                    $this->work->update_endtasktime($taskid);
+                    $this->load->view('workshedule/endtask',$prm);
+                    $this->work->add_endtask_comments($this->input->post('work_id'),$this->input->post('issue'));
+                    echo "success";
+                    redirect('Auth');
 		}
 		else{
-			$this->work->update_endtasktime($taskid);
+                    $this->load->view('workshedule/endtask',$prm);
+                    $this->work->update_endtasktime($taskid);
 		}
                 
 	}
