@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Stock extends CI_Controller {
+class Store extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -22,7 +22,7 @@ class Stock extends CI_Controller {
     public function __construct() {
         parent::__construct();
 		$this->load->database('test');
-		$this->load->model(array('Stock_model','Extra_work'));
+		$this->load->model(array('Stock_model','Extra_work','Store_Model'));
 		 $this->load->helper(array('text','form'));
                  $this->load->library(array('table','form_validation'));
                  $this->session;
@@ -53,65 +53,29 @@ class Stock extends CI_Controller {
      $this->load->view('Stock/view_all');
     }
     
-    
-    
     function insert(){
-        if(isset($_REQUEST['Confirm'])){
-           $data['stock_id']=$_REQUEST['ItemType'];
-           $data['discription']=$_REQUEST['discription'];
-           $data['used_by']=$_REQUEST['usedby'];
-           if($this->Stock_model->put_stock($data)){
-               echo "successfully inserted";
-               echo "<a href=".site_url('Stock/insert')."> Insert More</a>";
-               
-           }
-        }
-        else{
-        $DB=$this->Stock_model->get_stocktype();
-        $fl=$DB->result();
-        $key=array();
-        $val=array();
-        foreach($fl as $v){
-            array_push($key,$v->id);
-            array_push($val,$v->item);
-            //$f2=array($v->id =>$v->item);
-            //array_combine($rtn[$v->id], $rtn[$v->item);
-            //array_push($rtn,$f2);
-        }
-        $dbs['dbs']=array_combine($key,$val);
-       // var_dump($dbs);
-        $this->load->view('stock/add_stock',$dbs);
-    }
+        $this->load->view('store/insert_in');
     }
     
-    function add_stockdis(){//Stock discription
-        
+    function search_color(){
+         if($this->input->post('id')){
+             $rs=$this->Store_Model->search_color($this->input->post('id'));
+         }
     }
     
-    function add_stocktype(){
-        
-    }
-    
-    function view_search(){
-        if(isset($_REQUEST['id'])){
-           // echo "hello view stock result";
-           // var_dump($_REQUEST);
-            echo $this->table->generate($this->Stock_model->viewall($_REQUEST['id']));
-        }else{
-            echo "No report";
+    function search_name(){
+        if($this->input->post('id')){
+            $rs=$this->Store_Model->search_name($this->input->post('id'));
+            $val=array();
+            foreach($rs as $v){
+                array_push($val, $v->work);
+               // echo "<p>$v->work</p>";
+               // echo "<br>";
+            } 
+           // var_dump($val);
+            echo form_dropdown('srchname',$val);
+           // echo json_encode($rs);
         }
         
     }
-    function view_stock($usedby=NULL){
-        if($usedby=='ALL'){
-            $record=$this->Stock_model->viewall();
-            echo $this->table->generate($record);
-        }else{
-            echo "filt";
-            //echo $this->table->generate($this->Stock_model->viewall($_REQUEST['id']));
-        }
-    }
-    
-    
-    
 }

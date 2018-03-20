@@ -3,7 +3,7 @@
   <head>
     <meta charset='utf-8'>
     <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
-    <title>Dashboard</title>
+    <title>Applications to automate business processes.</title>
     <meta content='Nasir' name='author'>
     <meta content='' name='description'>
     <meta content='' name='keywords'>
