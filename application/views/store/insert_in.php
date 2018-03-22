@@ -27,24 +27,36 @@
 <?php 
 echo form_open('Store/insert');
 //echo "<tr><td>Stock Type</td><td>".form_dropdown('ItemType',$dbs)."</td></tr>";
+/* // For Future use///
+ * foreach($form as $k=>$v){
+    if($k!='id'){
+       echo form_label('Name of '.$k, $k) . form_dropdown($k,$v).'<br>';
+    }
+} */
+//var_dump($form);
+
 ?>
+            
             
             <input type="text" id="srchname" placeholder="accoserious name" name="aname">
             <input type="text" placeholder="accoserious Type">
             <input type="text" placeholder="used by">
             <input type="text" id="srchcolor" placeholder="color">  
             <input type="text" placeholder="size"> 
-            <?php echo form_label('item Name', 'item'); ?>
+            <?php //echo form_label('item Name', 'item'); ?>
             
             
         <tr><td>Stock Discription</td><td><textarea name="discription" class='form-control' rows='4' required></textarea> </td></tr>
 <?php
-
-echo form_label('Name of item', 'name') . form_input('name') ."<br>";
 echo form_label('supplier Name', 'supplier') . form_input('supplier') ."<br>";
-//echo form_label('item Name', 'item') . form_input('item') ."<br>";
+echo form_label('Item', 'Item') . form_input('Item') ."<br>";
 echo form_label('color Name', 'color') . form_input('color') ."<br>";
-echo form_label('Size ', 'size') . form_input('size') ."<br>";
+echo form_label('color Code', 'color_code') . form_input('color_code') ."<br>";
+echo form_label('size', 'size') . form_input('size') ."<br>";
+echo form_label('Name of item', 'name') . form_input('name') ."<br>";
+echo form_label('Quentity', 'quentity') . form_input('quentity') ."<br>";
+//echo form_label('item Name', 'item') . form_input('item') ."<br>";
+
 echo form_submit('Submit','Submit');
 //echo "<tr><td>Used By</td><td>".form_input('usedby')."</td></tr>";
 //echo "<tr><td></td><td>".form_submit('Confirm','Confirm')."</td></tr>";

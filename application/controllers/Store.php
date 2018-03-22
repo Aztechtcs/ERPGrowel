@@ -54,7 +54,44 @@ class Store extends CI_Controller {
     }
     
     function insert(){
-        $this->load->view('store/insert_in');
+               
+        /* FOR FUTURE USE ONLY */
+       // $this->load->view('store/insert_in');
+      /*  $store_material=$this->Store_Model->get_flds();
+        //var_dump($store_material);
+        $smf=array();
+         $smc=array();
+        foreach($store_material as $k=>$v){
+            array_push($smf,$v->Field);
+              //var_dump($this->Store_Model->get_colms($v->Field)); 
+            //array_push($smf,$v->Field);
+           $scols= $this->Store_Model->get_colms($v->Field);
+           $rss=array();
+           $exc=$v->Field;
+            foreach($scols as $ck=>$cv){
+                array_push($rss,$cv->$exc);
+            }
+           // var_dump($rss);
+           // $smf->$exc=$rss;
+            array_push($smc,$rss);
+        }
+        
+       //array_push();
+        
+       // var_dump($smf);
+       // $x=array_merge($smc,$smf);
+      $x['form']= array_combine($smf, $smc); */
+      $this->load->view('store/insert_in');
+       // var_dump($x);
+    }
+    
+    function show_all_stock(){
+        $last5stock=$rs=$this->Store_Model->show_all_stock();
+         echo $this->table->generate($last5stock);
+    }
+    
+    function add_stock(){
+        
     }
     
     function search_color(){
