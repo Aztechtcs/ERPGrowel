@@ -54,6 +54,9 @@ class Store extends CI_Controller {
     }
     
     function insert(){
+        if($this->input->post('Submit')){
+            echo "thankyou";
+        }
                
         /* FOR FUTURE USE ONLY */
        // $this->load->view('store/insert_in');
@@ -85,7 +88,7 @@ class Store extends CI_Controller {
        // var_dump($x);
     }
     
-    function show_all_stock(){
+    function show_last5_stock(){
         $last5stock=$rs=$this->Store_Model->show_all_stock();
          echo $this->table->generate($last5stock);
     }
