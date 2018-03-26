@@ -61,6 +61,11 @@ class Auth extends CI_Controller {
                  }
 	}
         
+        function site_map(){
+            $this->load->view('workshedule/sitemap');
+        }
+        
+        
         function viwe_all(){
             if($this->sessionpass()){
                 $this->load->view('workshedule/deshboard_Viewall');

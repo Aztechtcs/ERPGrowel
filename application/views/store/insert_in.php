@@ -19,13 +19,14 @@
             </div>
           </div>
             <div class='panel-body'>
-                
+               <div id="detail">hii</div>
+                <div id="last5">last five</div> 
                 
             </div>
 
 
 <?php 
-echo form_open('Store/insert' ,'id="storentry"');
+echo form_open();
 //echo "<tr><td>Stock Type</td><td>".form_dropdown('ItemType',$dbs)."</td></tr>";
 /* // For Future use///
  * foreach($form as $k=>$v){
@@ -49,30 +50,36 @@ echo form_open('Store/insert' ,'id="storentry"');
      <?php /*  <tr><td>Stock Discription</td><td><textarea name="discription" class='form-control' rows='4' required></textarea> </td></tr>
 
              */?>
-            <table class=table>
+            <table class=table ng-app="" ng-init="='Rack_id=NA'">
                 <tr>
                     <td><?php echo form_label('supplier Name', 'supplier'); ?></td>
-                    <td><input type="text" id="supplier" placeholder="supplier name" name="supplier" required></td>
+                    <td><input type="text" id="supplier" ng-model="supplier" placeholder="supplier name" name="supplier" required></td>
+                    <td><p id="supplyerHint">i.e</p></td>
+                   
                 </tr>
                  <tr>
                     <td><?php echo form_label('Item', 'Item'); ?></td>
-                    <td><input type="text" id="Item" placeholder="i.e Label, Thread etc" name="Item" required></td>
-                </tr>
+                    <td><input type="text" ng-model="Item" id="Item" placeholder="i.e Label, Thread etc" name="Item" required></td>
+                    <td><p id="itemHint">i.e</p></td>
+                 </tr>
                  <tr>
                     <td><?php echo form_label('color Name', 'color'); ?></td>
-                    <td><input type="text" id="color" placeholder="i.e Red,orange" name="color" required></td>
-                </tr>
+                    <td><input type="text" ng-model="color" id="color" placeholder="i.e Red,orange" name="color" required></td>
+                     <td><p id="colornameHint">i.e</p></td>
+                 </tr>
                  <tr>
                     <td><?php echo form_label('color Code', 'color_code'); ?></td>
-                    <td><input type="text" id="color_code" placeholder="i.e #7729 " name="color_code" required></td>
-                </tr>
+                    <td><input type="text" ng-model="color_code" id="color_code" placeholder="i.e #7729 " name="color_code" required></td>
+                     <td><p id="colorcodeHint">i.e</p></td>
+                 </tr>
                  <tr>
                     <td><?php echo form_label('size', 'size'); ?></td>
-                    <td><input type="text" id="size" placeholder="i.e M,XL" name="size" required></td>
-                </tr>
+                    <td><input type="text"  ng-model="size" id="size" placeholder="i.e M,XL" name="size" required></td>
+                    <td><p id="sizeHint">i.e</p></td>
+                 </tr>
                  <tr>
                     <td><?php echo form_label('Name of item', 'name'); ?></td>
-                    <td><input type="text" id="Item" placeholder="Item name" name="Item" required></td>
+                    <td><input type="text" id="Item_name" value="{{supplier + ' ' + Item +' ' + color + '[' + color_code + '] ' + size }}" placeholder="Item name" name="Item_name" required></td>
                 </tr>
                  <tr>
                     <td><?php echo form_label('Quentity', 'quentity'); ?></td>
@@ -93,31 +100,110 @@ echo form_open('Store/insert' ,'id="storentry"');
 //echo form_label('Name of item', 'name') . '<input type="text" id="Item" placeholder="Item name" name="Item" required>' ."<br>";
 //echo form_label('Quentity', 'quentity') . '<input type="number" id="quentity" placeholder="total Quentity 2,3" name="quentity" required>' ."<br>";
 //echo form_label('item Name', 'item') . form_input('item') ."<br>";
-echo form_button('Submit','Submit');
+//echo form_button('Submit','Submit');?> <input type="button" id="Submits" value="Click me" name="click me" ><?php
 //echo form_submit('Submit','Submit');
 //echo "<tr><td>Used By</td><td>".form_input('usedby')."</td></tr>";
 //echo "<tr><td></td><td>".form_submit('Confirm','Confirm')."</td></tr>";
 echo form_close();
 ?>
 </table>
-<div id="detail">hii</div>
-<div id="last5">last five</div>
 
- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" type="text/javascript"></script><script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script><script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js" type="text/javascript"></script><script src="assets/javascripts/application-985b892b.js" type="text/javascript"></script>
+
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" type="text/javascript"></script>
+ <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
+ <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js" type="text/javascript"></script>
+ <script src="assets/javascripts/application-985b892b.js" type="text/javascript"></script>
+ <script src="<?php echo site_url('assets/angular.min.js'); ?>" ></script>
+ 
  <script>
  $("document").ready(function(){
+     last5();
+     function hint(dbs,colms,pls){
+         //var colms ='supplier';
+         $.ajax({
+             type:"get",
+             url:"<?php echo site_url('Store/supplier_hint'); ?>",
+             data:{search:dbs ,colm:colms},
+             success:function(data){$(pls).html(data);}
+         });
+         last5();
+     }
+    // hint('k');
+     $("#supplier").keyup(function(){
+     var src=$("#supplier").val();
+        hint(src,'supplier','#supplyerHint');
+     });
+     
+     $("#Item").keyup(function(){
+         var sch=$("#Item").val();
+         hint(sch,'item','#itemHint');
+     });
+      $("#color").keyup(function(){
+         var sch=$("#color").val();
+         hint(sch,'color','#colornameHint');
+     });
+      $("#color_code").keyup(function(){
+         var sch=$("#color_code").val();
+         hint(sch,'color_code','#colorcodeHint');
+     });
+       $("#size").keyup(function(){
+         var sch=$("#size").val();
+         hint(sch,'size','#sizeHint');
+     });
+     
+     
+    // $("#last5").html('hiii last 5');
+    $("#Submits").click(function(){
+        $.ajax({
+            type:"post",
+            url:"<?php echo site_url('Store/in_item'); ?>",
+            //data:{color_code:$("#color_code").val()},
+             data:$("form").serialize(),
+          //  success:function(data){$("#detail").html(data);}
+        }).done(function(ds){
+            $("#detail").html('<br>' + ds);
+        }).fail(function(){
+            $("#detail").html('fail html');
+        });
+    });
+    
+    function delete_record(id){ /*show_last5page work */
+    $.ajax({
+        url:<?php echo site_url('Store/delete_rcecordbyid'); ?>,
+        type:"post",
+        data:{id:id},
+        succcess:function(data){$('#last5').html(data);}
+    });
+    }
+    
+     function last5(){
+         $.ajax({
+             url:"<?php echo site_url('Store/show_last5_stock'); ?>",
+             success:function(data){$('#last5').html(data);}
+         });
+     }
+     
+ });
+ </script>
+ 
+ <?php /*
+ <script>
+ $("document").ready(function(){
+     
      function fils(fl){
          $("#srchname").val()=fl;
      }
-     
-     $("#storentry").submit(function(){
+    /* $("#Submit").click(function(){
+         ("#detail").html('hiiii click clicked');
+     });*/
+     /*$("#storentry").submit(function(){
          $.ajax({
              url:"<?php echo site_url('Store/insert'); ?>",
              data:{$( this ).serialize()},
-             ssuccess:function(data){	$('#detail').html(data);}
+             success:function(data){	$('#detail').html(data);}
          });
-     });
-     function last5(){
+     });*/
+   /*  function last5(){
          $.ajax({
              url:"<?php echo site_url('Store/show_last5_stock'); ?>",
              success:function(data){$('#last5').html(data);}
@@ -150,7 +236,7 @@ echo form_close();
 		else
 		{
 			//showResult();	
-                       // dispstock()
+                       //dispstock()
 		}
 	});
          $('#srchcolor').keyup(function(){
@@ -168,5 +254,6 @@ echo form_close();
  });    
  
  </script>
+ */ ?>
   </body>
 </html>

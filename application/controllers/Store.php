@@ -53,11 +53,41 @@ class Store extends CI_Controller {
      $this->load->view('Stock/view_all');
     }
     
-    function insert(){
-        if($this->input->post('Submit')){
-            echo "thankyou";
+    function in_item(){
+         if($this->input->post('Submit')){
+            var_dump($_REQUEST);
+            //echo "thankyou";
         }
-               
+        else{
+            echo "else statement <br>";
+            var_dump($_REQUEST);
+        }
+    }
+    
+    function supplier_hint($field=NULL){
+        if($this->input->get('search')!=''){
+            $search=$this->input->get('search');
+            $field=$this->input->get('colm');
+            $fl=array("field"=>$field,
+                    "search"=>$search,
+                );
+           // echo "test only";
+             $fl=$this->Store_Model->get_hint($fl);
+             foreach($fl as $K=>$V){
+                 echo $V->$field .' / '; 
+             }
+            // var_dump($fl);
+            // echo $f1;
+        }
+        else{
+            echo "test else only";
+        }
+        if($field!=NULL){
+            
+        }     
+    }
+    
+    function insert(){      
         /* FOR FUTURE USE ONLY */
        // $this->load->view('store/insert_in');
       /*  $store_material=$this->Store_Model->get_flds();
@@ -88,9 +118,42 @@ class Store extends CI_Controller {
        // var_dump($x);
     }
     
+    function delete_record($id){
+        //deleted
+    }
+    function delete_rcecordbyid(){
+        if($this->input->post('id')){
+            $this->Store_Model->delete_rcecordbyid($this->input->post('id'));
+        }
+    }
+    
     function show_last5_stock(){
-        $last5stock=$rs=$this->Store_Model->show_all_stock();
-         echo $this->table->generate($last5stock);
+        $rs=$this->Store_Model->show_all_stock();
+        $last5stock=$rs->result();
+    $this->table->set_heading('supplier','item','color','color_code','size','edit','Delete');
+    
+    foreach($last5stock as $row){
+        $this->table->add_row(
+                $row->supplier, 
+                $row->item,
+                $row->color,
+                $row->color_code,
+                $row->size,
+                $row->name,
+                anchor('Store/delete_record/'.$row->id,'Delete')
+               );
+        //var_dump($row);
+    }
+   // foreach($last5stock->result() as $row) {
+   // $links  = anchor('Store/edit/'.$row['id'] ,'Edit');
+   // $links .= anchor('Store/delete_record/'.$row['id'] , 'Delete');
+   // $this->table->add_row('Fred', 'Blue', 'Small','','','','');
+    //}
+    
+    echo $this->table->generate();
+    
+        //var_dump($last5stock->result());
+       // echo $this->table->generate($last5stock);
     }
     
     function add_stock(){

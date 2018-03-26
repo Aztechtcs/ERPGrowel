@@ -21,9 +21,9 @@
       </a>
       <ul class='nav navbar-nav pull-right'>
         <li class='dropdown'>
-          <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
+          <a class='dropdown-toggle' data-toggle='dropdown' href='<?php echo site_url('Auth/site_map'); ?>'>
             <i class='icon-envelope'></i>
-            Messages
+            Site Map
             <span class='badge'>x</span>
             <b class='caret'></b>
           </a>
