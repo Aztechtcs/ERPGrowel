@@ -13,7 +13,7 @@
 class Extra_work extends CI_Model{
     function __construct(){
 	parent::__construct();
-	ini_set('date.timezone', 'UTC');
+	ini_set('date.timezone', 'Asia/Kolkata');
     }
     
     function get_name(){
