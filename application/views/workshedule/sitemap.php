@@ -1,3 +1,14 @@
+<?php
+$links=array(
+    'Store/insert'=>'Insert Item In Store',
+    'formBuilder/demo'=>'formBuilder',
+    'Manager'=>'Manager module',
+    'Manager/add_supplier'=>'add_supplier Module',
+    
+);
+
+?>
+
 <?php $this->load->view('workshedule/header'); ?>
       <!-- Content -->
       <div id='content'>
@@ -18,12 +29,23 @@
             </div>
           </div>
           <div class='panel-body'>
+              <table>
+                  
+                      
+              
           <?php //echo site_url('Store/insert'); 
-          echo anchor('Store/insert', site_url('Store/insert'));
+         // var_dump($links);
+          foreach($links as $k=>$v){
+              echo '<tr><td>'.anchor($k, site_url($k)).'</td><td>'.$v.'</td></tr>';
+          }
+         /* echo anchor('Store/insert', site_url('Store/insert'));
           
-          ?> Insert Item In Store
+          ?> Insert Item In Store <br>
 
-
+<?php echo anchor('formBuilder/demo', site_url('formBuilder')); ?> formBuilder<br>
+          <?php echo anchor('Manager', site_url('Manager')); ?> Manager Module<br>
+          <?php echo anchor('Manager/add_supplier', site_url('Manager/add_supplier')); ?> add_supplier Module<br>
+          */?></table>
 
 <div id="tbl"></div>
 <div id="success"></div>

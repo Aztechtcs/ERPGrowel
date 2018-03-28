@@ -32,6 +32,46 @@ class Manager extends CI_Controller {
                 
     }
     
+    function add_supplier(){
+        if(isset($_REQUEST)){
+            var_dump($_REQUEST);
+        }
+        //$dbs['formdata']= file_get_contents(site_url('application/views/manager/form.js'));
+        $dbs['formdata']='add_supplier.js';
+        $this->load->view('manager/dynamic_formbuild',$dbs);
+    }
+    
+   /* function fatch_fdb($form_name){
+        $this->load->view('manager/'.$form_name);
+    } */
+    
+    function enter_style(){
+        
+    }
+    
+    function new_order(){/*new order entry*/
+        if($this->input->post('order_Submit')){
+            if($this->input->post('order_number')!=NULL){
+                /* MAIN OPERATION */
+                var_dump($_REQUEST);
+            }
+            else{$this->load->view('manager/insert_order');}
+        }else{
+            $this->load->view('manager/insert_order');
+        }
+    }
+    
+    
+    
+    function insert_febric_receive(){}
+    
+    function inspection_febric(){}
+    
+    function cutting(){}
+    
+    function inspection_cutting(){}
+    
+    function index(){}
     
           
         private function sessionpass(){
