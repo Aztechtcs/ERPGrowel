@@ -32,15 +32,70 @@ class Manager extends CI_Controller {
                 
     }
     
+    
+    function jsbuilder(){
+        if(isset($_REQUEST)){
+            var_dump($_REQUEST);
+        }
+        $this->load->view('manager/jsonbuilder');
+    }
+    
     function add_supplier(){
         if(isset($_REQUEST)){
+            var_dump($_REQUEST);
+        }
+        //$dbs['formdata']= file_get_contents(site_url('application/views/manager/form.js'));
+        $dbs['formdata']='demo.js';
+        $this->load->view('manager/dynamic_formbuild',$dbs);
+    }
+    
+    function get_json($file){
+        $this->load->view('manager/'.$file);
+    }
+    
+    function insert_requirement(){
+        if($_REQUEST){
+            var_dump($_REQUEST);
+        }
+         $d['formdata']='insert_requirement.php';
+         $this->load->view('manager/dynamic_formbuild',$d);
+    }
+    
+    
+    function cutting_operation(){
+         if($_REQUEST){ var_dump($_REQUEST);}
+         $d['formdata']='cutting_operation.php';
+         $d['operation']='Cutting Operation';
+         $this->load->view('manager/dynamic_formbuild',$d);
+    }
+    
+    
+    function add_neworder(){
+        if(isset($_REQUEST)){
+            var_dump($_REQUEST);
+        }
+         $d['formdata']='add_order.js';
+         $this->load->view('manager/dynamic_formbuild',$d);
+        // echo $d;
+           //$this->load->view('manager/add_order.js');
+       /*  if(isset($_REQUEST)){
+            var_dump($_REQUEST);
+        }
+        else{
+           
+        }
+        $dbs['formdata']='add_order.js';
+        $this->load->view('manager/dynamic_formbuild',$dbs);   */
+    }
+    
+    function add_order(){
+         if(isset($_REQUEST)){
             var_dump($_REQUEST);
         }
         //$dbs['formdata']= file_get_contents(site_url('application/views/manager/form.js'));
         $dbs['formdata']='add_supplier.js';
         $this->load->view('manager/dynamic_formbuild',$dbs);
     }
-    
    /* function fatch_fdb($form_name){
         $this->load->view('manager/'.$form_name);
     } */

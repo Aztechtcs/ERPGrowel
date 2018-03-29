@@ -4,6 +4,11 @@ $links=array(
     'formBuilder/demo'=>'formBuilder',
     'Manager'=>'Manager module',
     'Manager/add_supplier'=>'add_supplier Module',
+    //'Manager/jsbuilder'=>'json rest API Module', 
+    'Manager/add_neworder'=>'Add new Order',
+    'Manager/insert_requirement'=>'Insert Requirement',
+    'Manager/cutting_operation'=>'Cutting Status Data Entry',
+    
     
 );
 
