@@ -1,4 +1,6 @@
-[
+<?php 
+
+$t='[
 	{
 		"type": "autocomplete",
 		"required": true,
@@ -6,7 +8,7 @@
 		"placeholder": "Add Supplier",
 		"className": "form-control",
 		"name": "supplier_name",
-		"values": [
+		"values":  [
 			{
 				"label": "Kokai",
 				"value": "1"
@@ -43,8 +45,8 @@
 				"label": "Ruby",
 				"value": "9"
 			}
-		]
-	},
+		] 
+	}, 
 	{
 		"type": "text",
 		"required": true,
@@ -93,6 +95,48 @@
 			}
 		]
 	},
+	{
+		"type": "number",
+		"required": true,
+		"label": "Quantity",
+		"placeholder": "Quantity",
+		"className": "form-control",
+		"name": "quantity",
+		"min": "1"
+	},
+	{
+		"type": "button",
+		"subtype": "submit",
+		"label": "Button",
+		"className": "btn btn-default",
+		"name": "button-1522318229485",
+		"style": "default"
+	}
+]';
+
+//echo htmlspecialchars($t);
+        ?>
+[
+	 
+	{
+		"type": "text",
+		"required": true,
+		"label": "Order Name",
+		"placeholder": "Order Name",
+		"name": "order_name",
+		"subtype": "text",
+		"className": "red form-control"
+	},
+	{
+		"type": "text",
+		"required": true,
+		"label": "size",
+		"placeholder": "M,L,XL etc",
+		"name": "size",
+		"subtype": "text",
+		"className": "red form-control"
+	},
+	
 	{
 		"type": "number",
 		"required": true,

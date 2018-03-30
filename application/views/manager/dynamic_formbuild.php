@@ -23,7 +23,9 @@
         $deletedFormat = "";
     $str=file_get_contents(site_url('Manager/get_json/'.$formdata));
     $str=str_replace("$oldMessage", "$deletedFormat",$str);
-    //echo $str;
+    // $str=str_replace("\t", "$deletedFormat",$str);
+    //$str=str_replace("\r", "$deletedFormat",$str);
+    echo $str;
         ?>
                <?php echo form_open(); ?>
               <div id="build-wrap2"><div>

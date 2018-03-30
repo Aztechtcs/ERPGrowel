@@ -181,6 +181,78 @@ class manager_model extends CI_Model{
 	ini_set('date.timezone', 'Asia/Kolkata');
     }
     
+    function add_buyer($d){
+        //replace INTO `test`.`buyer` (`name`, `date`) VALUES ('Bhartiye', CURRENT_TIMESTAMP);
+        if($this->db->replace('buyer',$d)){
+            return true;
+        }
+    }
+    
+    private function add_style($d){
+        $this->db->insert('styles',$d);
+           // return true;
+        
+    }
+   function add_order($d){
+       $this->db->insert('order',$d);
+   }
+    function get_stylebyid($data){
+        //var_dump($data);
+        $this->db->select('id');
+        $re=$this->db->get_where('styles',$data);
+        $ret=$re->result();
+        if($ret){
+                return $ret[0];
+        }
+        else{
+             $this->add_style($data);
+             $this->get_stylebyid($data);
+        }
+    }
+    
+    function json_Styles(){
+        $this->db->select('name');
+        $b=$this->db->get('styles');
+        $by=$b->result();
+       $label=array();
+       $value=array();
+        $v=array();
+        foreach($by as $ky=>$val){
+            //var_dump($val->name);
+            $br=array('label'=>$val->name,'value'=>$val->name);
+            array_push($label, 'label');
+            array_push($value, 'value');
+            array_push($v, $br);
+        }
+        $jf='';
+        foreach($v as $value){
+            $jf.=json_encode($value).',';
+        }
+       $jf=trim($jf,',');
+        echo $jf; 
+    }
+    
+    function json_buyer(){
+        $this->db->select('name');
+        $b=$this->db->get('buyer');
+        $by=$b->result();
+       $label=array();
+       $value=array();
+        $v=array();
+        foreach($by as $ky=>$val){
+            //var_dump($val->name);
+            $br=array('label'=>$val->name,'value'=>$val->name);
+            array_push($label, 'label');
+            array_push($value, 'value');
+            array_push($v, $br);
+        }
+        $jf='';
+        foreach($v as $value){
+            $jf.=json_encode($value).',';
+        }
+       $jf=trim($jf,',');
+        echo $jf; 
+    }
     
     
 }

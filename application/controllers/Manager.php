@@ -21,32 +21,36 @@ class Manager extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
-		$this->load->database('test');
-		$this->load->model('work');
-                $this->load->model('Extra_work');
-		 $this->load->helper('text');
-                 $this->load->helper('form');
-                 $this->load->library('form_validation');
-                 $this->session;
-                 
-                
+            $this->load->database('test');
+            $this->load->model('work');
+            $this->load->model('Extra_work');
+            $this->load->model('manager_model');
+            $this->load->helper('text');
+            $this->load->helper('form');
+            $this->load->library('form_validation');
+            $this->session;   
+            
     }
     
-    
-    function jsbuilder(){
+    function index(){
+       // $this->manager_model->json_buyer();
+      redirect('Auth/site_map');
+    }
+   /* function jsbuilder(){
         if(isset($_REQUEST)){
             var_dump($_REQUEST);
         }
         $this->load->view('manager/jsonbuilder');
-    }
+    }*/
     
     function add_supplier(){
-        if(isset($_REQUEST)){
+        if($this->input->post()){
             var_dump($_REQUEST);
         }
         //$dbs['formdata']= file_get_contents(site_url('application/views/manager/form.js'));
-        $dbs['formdata']='demo.js';
-        $this->load->view('manager/dynamic_formbuild',$dbs);
+        $d['formdata']='addnewsupplier.php';
+        $d['operation']='Insert new Supplier';
+        $this->load->view('manager/dynamic_formbuild',$d);
     }
     
     function get_json($file){
@@ -57,48 +61,50 @@ class Manager extends CI_Controller {
         if($_REQUEST){
             var_dump($_REQUEST);
         }
-         $d['formdata']='insert_requirement.php';
-         $this->load->view('manager/dynamic_formbuild',$d);
+        $d['formdata']='insert_requirement.php';
+        $d['operation']='Insert Requirements Entry';
+        $this->load->view('manager/dynamic_formbuild',$d);
     }
     
     
     function cutting_operation(){
-         if($_REQUEST){ var_dump($_REQUEST);}
-         $d['formdata']='cutting_operation.php';
-         $d['operation']='Cutting Operation';
-         $this->load->view('manager/dynamic_formbuild',$d);
+        if($this->input->post()){ var_dump($_REQUEST);}
+        $d['formdata']='cutting_operation.php';
+        $d['operation']='Cutting Operation';
+        $this->load->view('manager/dynamic_formbuild',$d);
+    }
+    function insert_neworder(){
+          if($this->input->post()){
+            $buyer=$this->input->post('Buyer');
+            $style_name=$this->input->post('style_name');
+            $order_id=$this->input->post('order_id');
+            $color=$this->input->post('color');
+            $quantity=$this->input->post('quantity');
+            if($buyer!=NULL and $style_name!=null and $order_id!=NULL and $color!=null and $quantity!=null){
+                $byuerDB=array('name'=>$buyer);
+                $styleDB=array('name'=>$style_name);
+                $this->manager_model->add_buyer($byuerDB);
+                $Style_id=$this->manager_model->get_stylebyid($styleDB);
+                if($Style_id==null){
+                     echo "new Style Entered";
+                     $Style_id=$this->manager_model->get_stylebyid($styleDB);   
+                }
+               //var_dump($Style_id->id);
+                //$this->manager_model->add_style($styleDB);
+                 $orderDB=array('number'=>$order_id,'color'=>$color,'quantity'=>$quantity,
+                    'Style_id'=>$Style_id->id,'buyer_name'=>$buyer);
+                $this->manager_model->add_order($orderDB);
+               //$orderDB=array();
+                // var_dump($_REQUEST);
+            }     
+          }
+        $d['formdata']='insert_neworderjson.php';
+        $d['operation']='Insert New Order';
+        $this->load->view('manager/dynamic_formbuild',$d);
     }
     
     
-    function add_neworder(){
-        if(isset($_REQUEST)){
-            var_dump($_REQUEST);
-        }
-         $d['formdata']='add_order.js';
-         $this->load->view('manager/dynamic_formbuild',$d);
-        // echo $d;
-           //$this->load->view('manager/add_order.js');
-       /*  if(isset($_REQUEST)){
-            var_dump($_REQUEST);
-        }
-        else{
-           
-        }
-        $dbs['formdata']='add_order.js';
-        $this->load->view('manager/dynamic_formbuild',$dbs);   */
-    }
     
-    function add_order(){
-         if(isset($_REQUEST)){
-            var_dump($_REQUEST);
-        }
-        //$dbs['formdata']= file_get_contents(site_url('application/views/manager/form.js'));
-        $dbs['formdata']='add_supplier.js';
-        $this->load->view('manager/dynamic_formbuild',$dbs);
-    }
-   /* function fatch_fdb($form_name){
-        $this->load->view('manager/'.$form_name);
-    } */
     
     function enter_style(){
         
@@ -126,7 +132,6 @@ class Manager extends CI_Controller {
     
     function inspection_cutting(){}
     
-    function index(){}
     
           
         private function sessionpass(){
