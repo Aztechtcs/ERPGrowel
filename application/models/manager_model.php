@@ -193,9 +193,11 @@ class manager_model extends CI_Model{
            // return true;
         
     }
-   function add_order($d){
-       $this->db->insert('order',$d);
+   function view_allorder(){
+       $this->db->select('*')->from('order')->order_by("id", "desc");
+       return $this->db->get();
    }
+   
     function get_stylebyid($data){
         //var_dump($data);
         $this->db->select('id');
@@ -209,6 +211,34 @@ class manager_model extends CI_Model{
              $this->get_stylebyid($data);
         }
     }
+    function add_order($detail){
+        $this->db->insert('order',$detail);
+    }
+    
+    function json_prcess_sequence(){
+        $this->db->select(array('id','name'));
+        $this->db->from('process_sequence');
+        $this->db->order_by("id", "asc");
+        $b=$this->db->get();
+        $by=$b->result();
+       $label=array();
+       $value=array();
+        $v=array();
+        foreach($by as $ky=>$val){
+            //var_dump($val->name);
+            $br=array('label'=>$val->name,'value'=>$val->id);
+            array_push($label, 'label');
+            array_push($value, 'value');
+            array_push($v, $br);
+        }
+        $jf='';
+        foreach($v as $value){
+            $jf.=json_encode($value).',';
+        }
+       $jf=trim($jf,',');
+        echo $jf; 
+    }
+    
     
     function json_Styles(){
         $this->db->select('name');

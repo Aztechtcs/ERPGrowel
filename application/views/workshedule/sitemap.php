@@ -8,9 +8,10 @@ $links=array(
     'Manager/insert_neworder'=>'Add new Order',
     'Manager/insert_requirement'=>'Insert Requirement',
     'Manager/cutting_operation'=>'Cutting Status Data Entry',
+    'Manager/insert_sizedetail'=>'edit Size details',
+    'Manager/view_allorder'=>'view All Order',
     
-    
-);
+    );
 
 ?>
 

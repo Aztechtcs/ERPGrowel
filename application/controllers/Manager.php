@@ -73,6 +73,57 @@ class Manager extends CI_Controller {
         $d['operation']='Cutting Operation';
         $this->load->view('manager/dynamic_formbuild',$d);
     }
+        
+    function insert_sizedetail($VERIFY=NULL){
+        if($this->input->post('Submit')){
+            $color=$this->input->post('color');
+            $size=$this->input->post('size');
+            $quantity=$this->input->post('quantity');
+            $c=0;
+            $this->load->library('table');
+            $this->table->set_heading('number', 'Color', 'Size','quantity','style_id','buyer_name');
+            $table=array();
+           while(sizeof($color)>$c){
+                  //$this->table->add_row($this->session->New_orderid ,$color[$c] ,$size[$c],$quantity[$c]);
+                  array_push($table, array($this->session->New_orderid ,$color[$c] ,$size[$c],$quantity[$c]));
+                 $this->manager_model->add_order(array('number'=>$this->session->New_orderid,'color'=>$color[$c],'size'=>$size[$c],'quantity'=>$quantity[$c],'style_id'=>$this->session->Style_id,'buyer_name'=>$this->session->buyer_name)); 
+            $c++;
+           }
+           echo $this->table->generate($table);
+           
+          //$this->insert_sizedetail($table);
+           redirect('Manager/view_allorder');
+        }
+        $this->load->view('manager/insert_sizedetail');
+        
+    }
+    
+    function view_allorder(){
+         $this->load->library('table');
+         $table=$this->manager_model->view_allorder();
+        $re['tbl']= $this->table->generate($table);
+        $this->load->view('manager/view_allorder',$re);
+    }
+    
+    function insert_orderdetail($data=NULL){
+        if($data!=NULL){
+            var_dump($data);
+        }
+        $d['operation']='Operation list';
+      /*  if($this->input->post('checkbox-group')!=null){
+            //Main Logic after Submit Information Code Here
+            foreach($this->input->post('checkbox-group') as $v){
+                $d['operation'].=$v.' / ';
+               // echo "op ";
+            }
+        }
+       */
+        $d['formdata']='operation_list.php';
+        $this->load->view('manager/dynamic_formbuild',$d);
+        
+        //echo 'Insert Order Detail PAge';
+    }
+    
     function insert_neworder(){
           if($this->input->post()){
             $buyer=$this->input->post('Buyer');
@@ -86,16 +137,16 @@ class Manager extends CI_Controller {
                 $this->manager_model->add_buyer($byuerDB);
                 $Style_id=$this->manager_model->get_stylebyid($styleDB);
                 if($Style_id==null){
-                     echo "new Style Entered";
+                     //echo "new Style Entered";
                      $Style_id=$this->manager_model->get_stylebyid($styleDB);   
                 }
-               //var_dump($Style_id->id);
-                //$this->manager_model->add_style($styleDB);
-                 $orderDB=array('number'=>$order_id,'color'=>$color,'quantity'=>$quantity,
-                    'Style_id'=>$Style_id->id,'buyer_name'=>$buyer);
-                $this->manager_model->add_order($orderDB);
-               //$orderDB=array();
-                // var_dump($_REQUEST);
+                 $orderDB=array('number'=>$order_id,'color'=>$color,'quantity'=>$quantity,'Style_id'=>$Style_id->id,'buyer_name'=>$buyer);
+                //$this->manager_model->add_order($orderDB);
+                $this->session->set_userdata('New_orderid',$order_id );//Number
+                $this->session->set_userdata('Style_id',$Style_id->id );
+                $this->session->set_userdata('buyer_name',$buyer );
+                //redirect('Manager/insert_ordcerdetail/');
+                redirect('Manager/insert_sizedetail/');
             }     
           }
         $d['formdata']='insert_neworderjson.php';
