@@ -26,7 +26,7 @@
     $str=str_replace("$oldMessage", "$deletedFormat",$str);
     // $str=str_replace("\t", "$deletedFormat",$str);
     //$str=str_replace("\r", "$deletedFormat",$str);
-    echo $str;
+   // echo $str;
         ?>
                <?php echo form_open(); ?>
               <div id="build-wrap2"><div>

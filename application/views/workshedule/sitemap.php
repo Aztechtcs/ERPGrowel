@@ -10,6 +10,7 @@ $links=array(
     'Manager/cutting_operation'=>'Cutting Status Data Entry',
     'Manager/insert_sizedetail'=>'edit Size details',
     'Manager/view_allorder'=>'view All Order',
+    'Manager/insert_orderdetail'=>'Insert Order Operation',
     
     );
 
