@@ -53,7 +53,7 @@
 		"subtype": "text",
 		"className": "red form-control"
 	},
-	{
+	<?php /*{
 		"type": "text",
                 "subtype": "text",
 		"required": true,
@@ -70,7 +70,7 @@
 		"placeholder": "Total Quantity",
 		"className": "form-control",
 		"name": "quantity"
-	},
+	},*/ ?>
 	{
 		"type": "button",
 		"subtype": "submit",

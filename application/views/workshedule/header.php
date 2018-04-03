@@ -81,6 +81,10 @@
             <i class='icon-file-text-alt'></i>
             <a href="<?php echo site_url('Auth/viwe_all'); ?>">View All Work</a>
           </li>
+           <li class='launcher'>
+            <i class='icon-table'></i>
+            <a href="<?php echo site_url('Manager/list_order'); ?>">View All Order</a>
+          </li>
           <li class='launcher'>
             <i class='icon-table'></i>
             <a href="tables.html">Tables</a>

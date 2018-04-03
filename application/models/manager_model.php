@@ -174,11 +174,22 @@ CONSTRAINT `FK_124` FOREIGN KEY `fkIdx_124` (`order_id`) REFERENCES `SampleDb`.`
  
  */
 
+/*
+ * SELECT `order`.`id`,`order`.`number`,`order`.`color`,`order`.`size`,`order`.`quantity`,sum(`order_processed`.`quantity`) as `completed`,`order`.`datetime` ,`order`.`quantity`- sum(`order_processed`.`quantity`)as 'remail' FROM `order` join `order_processed` on `order_processed`.`order_id`=`order`.`id` where `order_processed`.`operation_id` =1 group by `order_processed`.`order_id`
+ */
 
 class manager_model extends CI_Model{
     function __construct(){
 	parent::__construct();
 	ini_set('date.timezone', 'Asia/Kolkata');
+    }
+    
+     function list_order(){
+        $this->db->select(array('count(*) as number_Of_Color','number','datetime'));
+        $this->db->group_by(array('number'));
+        //$this->db->order_by('id','desc');
+        $gt= $this->db->get('order');
+        $gt=$gt->result();
     }
     
     function add_buyer($d){

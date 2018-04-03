@@ -22,15 +22,24 @@ class Manager extends CI_Controller {
     public function __construct() {
         parent::__construct();
             $this->load->database('test');
-            $this->load->model('work');
-            $this->load->model('Extra_work');
-            $this->load->model('manager_model');
-            $this->load->helper('text');
-            $this->load->helper('form');
-            $this->load->library('form_validation');
-            $this->session;   
-            
+            $this->load->model(array('work','Extra_work','manager_model'));
+            //$this->load->model();
+            //$this->load->model();
+            $this->load->helper(array('text','form'));
+            //$this->load->helper();
+            $this->load->library(array('form_validation','table'));
+            //$this->load->library();
+            $this->session;             
     }
+    
+    function list_order(){
+       //$this->load->view('part_header');
+       $ol= $this->manager_model->list_order();
+       $d['content']= $this->table->generate($ol);
+       $this->load->view('part_header',$d);
+    }
+    
+    
     
     function index(){
        // $this->manager_model->json_buyer();
@@ -80,7 +89,7 @@ class Manager extends CI_Controller {
             $size=$this->input->post('size');
             $quantity=$this->input->post('quantity');
             $c=0;
-            $this->load->library('table');
+           
             $this->table->set_heading('number', 'Color', 'Size','quantity','style_id','buyer_name');
             $table=array();
            while(sizeof($color)>$c){
@@ -129,9 +138,9 @@ class Manager extends CI_Controller {
             $buyer=$this->input->post('Buyer');
             $style_name=$this->input->post('style_name');
             $order_id=$this->input->post('order_id');
-            $color=$this->input->post('color');
-            $quantity=$this->input->post('quantity');
-            if($buyer!=NULL and $style_name!=null and $order_id!=NULL and $color!=null and $quantity!=null){
+            //$color=$this->input->post('color');
+            //$quantity=$this->input->post('quantity');
+            if($buyer!=NULL and $style_name!=null and $order_id!=NULL /* and $color!=null and $quantity!=null*/){
                 $byuerDB=array('name'=>$buyer);
                 $styleDB=array('name'=>$style_name);
                 $this->manager_model->add_buyer($byuerDB);
@@ -140,7 +149,7 @@ class Manager extends CI_Controller {
                      //echo "new Style Entered";
                      $Style_id=$this->manager_model->get_stylebyid($styleDB);   
                 }
-                 $orderDB=array('number'=>$order_id,'color'=>$color,'quantity'=>$quantity,'Style_id'=>$Style_id->id,'buyer_name'=>$buyer);
+                //$orderDB=array('number'=>$order_id,'color'=>$color,'quantity'=>$quantity,'Style_id'=>$Style_id->id,'buyer_name'=>$buyer);
                 //$this->manager_model->add_order($orderDB);
                 $this->session->set_userdata('New_orderid',$order_id );//Number
                 $this->session->set_userdata('Style_id',$Style_id->id );

@@ -11,7 +11,7 @@ $links=array(
     'Manager/insert_sizedetail'=>'edit Size details',
     'Manager/view_allorder'=>'view All Order',
     'Manager/insert_orderdetail'=>'Insert Order Operation',
-    
+    'Manager/list_order'=>'List Order',
     );
 
 ?>
