@@ -39,6 +39,7 @@ class Tna extends CI_Controller {
     }
     
     function index($startdate=null,$days=90){
+        redirect('Tna/enter_detail');
         /*$x=array('todayDate' => date('d/m/Y'),'tomorrowDate' => date('d/m/Y', strtotime(' +1 day')),'nextDay' => date('l', strtotime(' +2 day')));*/
        if($startdate==null){
           $startdate='20180409'; 
@@ -86,7 +87,10 @@ class Tna extends CI_Controller {
                if(date('l',strtotime($startdate . $str))!='Sunday'){
                    $next= date('Y-m-d',strtotime($startdate . $str));
                }else{
-                    $str=" - $v->endday days";
+                   $x=$v->endday;
+                   $x=$x-1;
+                   
+                    $str=" + $x days";
                     $next= date('Y-m-d',strtotime($startdate . $str));
                }
                $f=array('id'=>$v->id,'name'=>$v->name,'fixed_date'=>$next,'Day'=>date('l',strtotime($startdate . $str)));

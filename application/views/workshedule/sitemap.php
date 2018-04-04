@@ -14,7 +14,7 @@ $links=array(
     'Manager/list_order'=>'List Order',
     'Manager/explore_report'=>'proprt list',
     'Manager/status_entry'=>'Entry current Status',
-    
+    'Tna'=>'TNA Automatic Time chart CCreator',
     );
 
 ?>
