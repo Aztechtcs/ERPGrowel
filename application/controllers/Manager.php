@@ -40,8 +40,18 @@ class Manager extends CI_Controller {
        $this->load->view('part_header',$d);
     }
     
-    function explore_report(){
-        
+    function status_entry($id=null){
+        if($id==null){
+            redirect('Manager/list_order');
+        }
+    }
+    
+    function explore_report($id=null,$op_id=null){
+        if($id==null){
+            redirect('Manager/list_order');
+        }
+        $d=$this->manager_model->explore_report($id,$op_id);
+        echo $this->table->generate($d);
     }
     
     function explore_order($id=null){
@@ -51,7 +61,10 @@ class Manager extends CI_Controller {
         $order_id=$id;
         $operation_id=1;
        $d=$this->manager_model->explore_order($order_id,$operation_id);
+       $dr=$d->result();
+      // var_dump($dr);
        echo 'Operation1/Cutting <br>'.$this->table->generate($d);
+      echo 'History<br>'.$this->explore_report($dr[0]->id,1);
        $d=$this->manager_model->explore_order($order_id,2);
        echo '<hr><br>Operation 2/Swing <br>'.$this->table->generate($d);
     }

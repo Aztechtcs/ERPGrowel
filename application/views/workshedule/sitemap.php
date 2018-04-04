@@ -12,6 +12,9 @@ $links=array(
     'Manager/view_allorder'=>'view All Order',
     'Manager/insert_orderdetail'=>'Insert Order Operation',
     'Manager/list_order'=>'List Order',
+    'Manager/explore_report'=>'proprt list',
+    'Manager/status_entry'=>'Entry current Status',
+    
     );
 
 ?>

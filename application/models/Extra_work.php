@@ -44,6 +44,11 @@ class Extra_work extends CI_Model{
 		//$this->db->update();
 	}
 	
+        
+        function tna(){
+           $re= $this->db->get('tna');
+           return $re->result();
+        }
 	
 	
 	

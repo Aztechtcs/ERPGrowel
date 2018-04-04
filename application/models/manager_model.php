@@ -184,6 +184,10 @@ class manager_model extends CI_Model{
 	ini_set('date.timezone', 'Asia/Kolkata');
     }
     
+    function explore_report($order_id,$operation_id){
+        $this->db->select(array('order_processed.quantity','order_processed.datetime'));
+        return $this->db->get_where('order_processed',array('order_id'=>$order_id,'operation_id'=>$operation_id));
+    }
     
     function explore_order($order_id,$operationid=null){
         if($operationid==null){$operationid=1;}
@@ -196,15 +200,15 @@ sum(`order_processed`.`quantity`) AS `completed`,
 `order`.`datetime` AS `datetime`,
 (`order`.`quantity` - sum(`order_processed`.`quantity`)) AS `remain`
 from (`order` join `order_processed` on((`order_processed`.`order_id` = `order`.`id`))) where (`order_processed`.`operation_id` = 1) group by `order_processed`.`order_id`';
-    $this->db->select(array('order.id AS id','order.number AS number','order.color AS color',
+    $this->db->select(array('order.id AS id','order.number AS number','order.color AS color','order.Size',
         'order.quantity AS TotalOrder','sum(order_processed.quantity) AS completed',
-       '(order.quantity - sum(order_processed.quantity)) AS remain', 'order.datetime AS datetime'
+       '(order.quantity - sum(order_processed.quantity)) AS remain', 'order.datetime AS DATETIME'
         ));
     $this->db->from('order');
     $this->db->join('order_processed','order_processed.order_id = order.id');
-    $this->db->group_by('`order_processed`.`order_id`');
-    $this->db->where(array('`order_processed`.`operation_id`'=>$operationid,'order.number'=>$order_id));
-    echo "hi";
+    $this->db->group_by('order_processed.order_id');
+    $this->db->where(array('order_processed.operation_id'=>$operationid,'order.number'=>$order_id));
+    //echo "hi";
     return $this->db->get();
     
     //var_dump($d->result());
