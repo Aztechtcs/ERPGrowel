@@ -184,12 +184,40 @@ class manager_model extends CI_Model{
 	ini_set('date.timezone', 'Asia/Kolkata');
     }
     
+    
+    function explore_order($order_id,$operationid=null){
+        if($operationid==null){$operationid=1;}
+        $q='select `order`.`id` AS `id`,
+`order`.`number` AS `number`,
+`order`.`color` AS `color`,
+`order`.`size` AS `size`,
+`order`.`quantity` AS `Total Order`,
+sum(`order_processed`.`quantity`) AS `completed`,
+`order`.`datetime` AS `datetime`,
+(`order`.`quantity` - sum(`order_processed`.`quantity`)) AS `remain`
+from (`order` join `order_processed` on((`order_processed`.`order_id` = `order`.`id`))) where (`order_processed`.`operation_id` = 1) group by `order_processed`.`order_id`';
+    $this->db->select(array('order.id AS id','order.number AS number','order.color AS color',
+        'order.quantity AS TotalOrder','sum(order_processed.quantity) AS completed',
+       '(order.quantity - sum(order_processed.quantity)) AS remain', 'order.datetime AS datetime'
+        ));
+    $this->db->from('order');
+    $this->db->join('order_processed','order_processed.order_id = order.id');
+    $this->db->group_by('`order_processed`.`order_id`');
+    $this->db->where(array('`order_processed`.`operation_id`'=>$operationid,'order.number'=>$order_id));
+    echo "hi";
+    return $this->db->get();
+    
+    //var_dump($d->result());
+//$this->db->get_where('');
+    }
+   
      function list_order(){
         $this->db->select(array('count(*) as number_Of_Color','number','datetime'));
         $this->db->group_by(array('number'));
         //$this->db->order_by('id','desc');
         $gt= $this->db->get('order');
         $gt=$gt->result();
+        return json_encode($gt);
     }
     
     function add_buyer($d){

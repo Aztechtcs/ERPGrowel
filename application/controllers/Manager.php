@@ -35,10 +35,26 @@ class Manager extends CI_Controller {
     function list_order(){
        //$this->load->view('part_header');
        $ol= $this->manager_model->list_order();
-       $d['content']= $this->table->generate($ol);
+       //$d['content']= $this->table->generate($ol);
+       $d['content']=$ol;
        $this->load->view('part_header',$d);
     }
     
+    function explore_report(){
+        
+    }
+    
+    function explore_order($id=null){
+        if($id==null){
+            redirect('Manager/list_order');
+        }
+        $order_id=$id;
+        $operation_id=1;
+       $d=$this->manager_model->explore_order($order_id,$operation_id);
+       echo 'Operation1/Cutting <br>'.$this->table->generate($d);
+       $d=$this->manager_model->explore_order($order_id,2);
+       echo '<hr><br>Operation 2/Swing <br>'.$this->table->generate($d);
+    }
     
     
     function index(){
