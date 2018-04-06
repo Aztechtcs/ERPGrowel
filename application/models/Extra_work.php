@@ -16,19 +16,13 @@ class Extra_work extends CI_Model{
 	ini_set('date.timezone', 'Asia/Kolkata');
     }
     
-   
-    
     function get_name(){
         $this->db->select('user');
         $nm=$this->db->get_where('user_work',array('id'=>$this->session->id));
         $re =$nm->result();
-        return $re[0]->user;
+        return @$re[0]->user;
     }
    
-	
-	
-	
-	
 	function completework($ALL=NULL){
             if($ALL!=NULL){
                 $re=$this->db->get_where('work',array("complete" => 0));
