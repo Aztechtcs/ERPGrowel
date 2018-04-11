@@ -37,6 +37,7 @@ class Manager extends CI_Controller {
        $ol= $this->manager_model->list_order();
        //$d['content']= $this->table->generate($ol);
        $d['content']=$ol;
+       //var_dump($ol);
        $this->load->view('part_header',$d);
     }
     
@@ -44,6 +45,12 @@ class Manager extends CI_Controller {
         if($id==null){
             redirect('Manager/list_order');
         }
+    }
+    
+    function insert_report($id=null,$op_id=null){
+       $sal['ar']= $this->manager_model->get_order($id,$op_id=null);
+       $this->load->view('manager/insert_report',$sal);
+       //var_dump($sal);
     }
     
     function explore_report($id=null,$op_id=null){

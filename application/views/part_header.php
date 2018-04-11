@@ -22,7 +22,9 @@
         <table ng-app="myApp" ng-controller="myCtrl" border="1">
         <tr><th>Order Number</th><th>Start Date Time</th></th>
         <tr ng-repeat="x in records"><td> {{x.number}}</td><td> {{x.datetime}}</td>
-            <td><a href="<?php echo site_url('Manager/explore_order/{{x.number}}'); ?>">Explore</a></td></tr>
+            <td><a href="<?php echo site_url('Manager/explore_order/{{x.number}}'); ?>">Explore</a></td>
+            <td><a href="<?php echo site_url('Manager/insert_report/{{x.number}}'); ?>">Insert</a></td>
+        </tr>
         </table> 
                 
             </div>

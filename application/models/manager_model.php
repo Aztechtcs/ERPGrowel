@@ -184,6 +184,12 @@ class manager_model extends CI_Model{
 	ini_set('date.timezone', 'Asia/Kolkata');
     }
     
+    function get_order($id,$op_id=null){
+        $res=$this->db->get_where('order',array('number'=>$id));
+        return $res->result();
+        //$this->db->select(array(''));
+    }
+    
     function explore_report($order_id,$operation_id){
         $this->db->select(array('order_processed.quantity','order_processed.datetime'));
         return $this->db->get_where('order_processed',array('order_id'=>$order_id,'operation_id'=>$operation_id));
