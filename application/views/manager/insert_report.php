@@ -17,10 +17,15 @@ $size=array_unique($size);
 //var_dump($size);
 ?>
 
-<table>
+<table>  
 <?php 
+echo form_open();
+echo form_hidden('operation_id',1);
 foreach($ar as $v){
     echo form_input($v->id,'','placeholder ='.$v->id.'/'.$v->size.'/'.$v->color)."<br>";
 }
+
+echo form_submit('Submit','Submit');
+echo form_close();
 ?>
 </table>

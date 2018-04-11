@@ -48,7 +48,11 @@ class Manager extends CI_Controller {
     }
     
     function insert_report($id=null,$op_id=null){
-       $sal['ar']= $this->manager_model->get_order($id,$op_id=null);
+        if(isset($_REQUEST)){
+            var_dump($_REQUEST);
+        }
+       $sal['ar']= $this->manager_model->get_order($id,$op_id);
+       
        $this->load->view('manager/insert_report',$sal);
        //var_dump($sal);
     }
