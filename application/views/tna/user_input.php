@@ -40,7 +40,7 @@
     jQuery(function($) {
     // formData = '[{"type": "button","label": "Button","subtype": "button","className": "btn-default btn","name": "button-1522312799038","style": "default"},{"type": "date","label": "Date Field","className": "form-control","name": "date-1522312802470"},{"type": "number","label": "Number","className": "form-control","name": "number-1522312805866"}]';
    // formData='<?php //$this->load->view('manager/'.$formdata); ?>';
-     formData='[{"type": "date","required": true,"label": "ORIGINAL SAMPLE GIVEN","description": "ORIGINAL SAMPLE GIVEN Date","className": "form-control","name": "dateA"},{"type": "date","required": true,"label": "PO RECEIVE DATE","description": "PO RECEIVE DATE","placeholder": "PO RECEIVE DATE","className": "form-control","name": "dateB"},{"type": "date","required": true,"label": "SPEC RECEIVED DATE","description": "SPEC RECEIVED DATE","placeholder": "SPEC RECEIVED DATE","className": "form-control","name": "dateC"},{"type": "button","subtype": "submit","label": "Button","className": "btn btn-default","name": "button-1522838793204","style": "default"}]';
+     formData='[{"type": "text","required": true,"label": "Order_number","placeholder": "Order Number","name": "order_number","subtype": "text","className": "red form-control"},{"type": "date","required": true,"label": "ORIGINAL SAMPLE GIVEN","description": "ORIGINAL SAMPLE GIVEN Date","className": "form-control","name": "dateA"},{"type": "button","subtype": "submit","label": "Button","className": "btn btn-default","name": "button-1522838793204","style": "default"}]';
         $('#build-wrap2').formRender({formData});
     });
 </script>

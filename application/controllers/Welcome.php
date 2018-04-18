@@ -28,7 +28,20 @@ class Welcome extends CI_Controller {
                     'Alerts Panels'=>"",
                     "Logout"=>""
                     );
-        $this->load->view('header',$sb);
+        //$this->load->view('header',$sb);
+    }
+    
+    function mongodb(){
+        $client = new MongoDB\Client(
+    'mongodb://kay:Abcd!234@mycluster0-shard-00-00.mongodb.net:27017,mycluster0-shard-00-01.mongodb.net:27017,mycluster0-shard-00-02.mongodb.net:27017/admin?ssl=true&replicaSet=Mycluster0-shard-0&authSource=admin');
+
+$db = $client->test;
+        
+    }
+    
+    function tna(){
+        $this->load->view('theme/header');
+       // $this->load->view('tna/design_mailplz');
     }
     
 	public function index()

@@ -22,12 +22,40 @@ class Tna extends CI_Controller {
     public function __construct() {
         parent::__construct();
             $this->load->database('test');
-            $this->load->model(array('work','Extra_work','manager_model'));
+            $this->load->model(array('work','Extra_work','manager_model','Tna_model'));
             $this->load->helper(array('text','form'));
             $this->load->library(array('form_validation','table'));
+            $this->load->library('My_PHPMailer');
             $this->session;             
     }
     
+    public function send_mail() {
+        $mail = new PHPMailer();
+        $mail->IsSMTP(); // we are going to use SMTP
+        $mail->SMTPAuth   = true; // enabled SMTP authentication
+        $mail->SMTPSecure = "ssl";  // prefix for secure protocol to connect to the server
+        $mail->Host       = "smtp.growelimpex.com";      // setting GMail as our SMTP server
+        $mail->Port       = 25;                   // SMTP port to connect to GMail
+        $mail->Username   = "archana@growelimpex.com";  // user email address
+        $mail->Password   = "growel@123";            // password in GMail
+        //$mail->SentFrom('archana@growelimpex.com', 'Archana');  //Who is sending the email
+        //$mail->AddReplyTo("archana@growelimpex.com","Archana ");  //email address that receives the response
+        $mail->Subject    = "Email subject";
+        $mail->Body      = "HTML message";
+        $mail->AltBody    = "Plain text message";
+        $destino = "nasir@aztechtcs.com"; // Who is addressed the email to
+        $mail->AddAddress($destino, "Nasir");
+ 
+        $mail->AddAttachment("images/phpmailer.gif");      // some attached files
+        $mail->AddAttachment("images/phpmailer_mini.gif"); // as many as you want
+        if(!$mail->Send()) {
+            $data["message"] = "Error: " . $mail->ErrorInfo;
+        } else {
+            $data["message"] = "Message sent correctly!";
+        }
+        $this->load->view('sent_mail',$data);
+    }
+
     private function check_sunday($dump){
         /*if($dump['weekday']=='Sunday'){*/
         if($dump=='Sunday'){
@@ -58,6 +86,7 @@ class Tna extends CI_Controller {
         var_dump($date_list);
         $d=$this->Extra_work->tna();
     }
+    
     function display_table($tbl=null){
         if($tbl=null){
             redirect('Tna/enter_detailcc');
@@ -68,6 +97,7 @@ class Tna extends CI_Controller {
     
    function enter_detail(){
        if($this->input->post()){
+           $order_number=$this->input->post('order_number');
            $dateA=$this->input->post('dateA');
            $dateZ=$this->input->post('dateB');
            $dateY=$this->input->post('dateC');
@@ -88,16 +118,20 @@ class Tna extends CI_Controller {
                    $next= date('Y-m-d',strtotime($startdate . $str));
                }else{
                    $x=$v->endday;
-                   $x=$x-1;
-                   
+                   $x=$x+1;
                     $str=" + $x days";
                     $next= date('Y-m-d',strtotime($startdate . $str));
                }
-               $f=array('id'=>$v->id,'name'=>$v->name,'fixed_date'=>$next,'Day'=>date('l',strtotime($startdate . $str)));
+              // $f=array('id'=>$v->id,'name'=>$v->name,'fixed_date'=>$next,'Day'=>date('l',strtotime($startdate . $str)),'c'=>$order_number);
+               $f=array('id'=>null,'name'=>$v->name,'fixed_date'=>$next,'Day'=>date('l',strtotime($startdate . $str)),'Order_Number'=>$order_number);
+               $this->Tna_model->add_task($f);
                array_push($final,$f);
            }
+           //var_dump($final);
+           
            $d['json']=json_encode($final);
            //$this->display_table($final);
+           
           $this->load->view('tna/display_tna',$d);
        }
        else{
