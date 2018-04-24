@@ -17,6 +17,7 @@ $links=array(
     'Tna'=>'TNA Automatic Time chart CCreator',
     'Manager/insert_report'=>'Insert Report',
     'Tna/send_mail'=>'send mail',
+    'Tna/today_task'=>'TNA Task',
     );
 
 ?>

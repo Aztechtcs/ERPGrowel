@@ -26,7 +26,45 @@ class Tna extends CI_Controller {
             $this->load->helper(array('text','form'));
             $this->load->library(array('form_validation','table'));
             $this->load->library('My_PHPMailer');
-            $this->session;             
+            $this->session;     
+            $this->load->view('tna/Tna_header');
+    }
+    
+    function dashboard(){
+        $this->load->view('tna/TNA_dashboard');
+    }
+    
+    function get_completedtask(){
+        $d=$this->Tna_model->get_allby(1);
+        $db['json']= json_encode($d->result());
+        $this->load->view('tna/TNA_get_completedtask',$db);
+    }
+    
+    function click_complete($id){
+        $dbs['id']=$id;
+        if($_REQUEST){
+            $update['completed']='1';
+            $update['comments']=$this->input->post('comments');
+            $t=time();
+            $update['finish_date']= date("Y-m-d",$t);
+            $this->Tna_model->update_completeTask($update,$id);
+            var_dump($_REQUEST);
+        }
+        $this->load->view('tna/TNA_completetask',$dbs);
+    }
+    
+    function get_unclompltedtask(){
+        $d=$this->Tna_model->get_allby(0);
+        $db['json']= json_encode($d->result());
+        $this->load->view('tna/TNA_task_list',$db);
+    }
+    
+    function total_task(){
+        $d=$this->Tna_model->get_all();
+        $db['json']= json_encode($d->result());
+        //var_dump($db);
+        //var_dump($d->result());
+        $this->load->view('tna/TNA_task_list',$db);
     }
     
     public function send_mail() {
@@ -56,6 +94,12 @@ class Tna extends CI_Controller {
         $this->load->view('sent_mail',$data);
     }
 
+    function get_tna(){
+       $d= $this->Tna_model->get_task('Kokaidi abc');
+       var_dump($d->result());
+    }
+    
+    
     private function check_sunday($dump){
         /*if($dump['weekday']=='Sunday'){*/
         if($dump=='Sunday'){
@@ -135,7 +179,8 @@ class Tna extends CI_Controller {
           $this->load->view('tna/display_tna',$d);
        }
        else{
-           $this->load->view('tna/user_input');
+           //$this->load->view('tna/user_input');
+           $this->load->view('tna/TNA_input');
        } 
    }
     
