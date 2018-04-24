@@ -25,7 +25,7 @@ class Tna extends CI_Controller {
             $this->load->model(array('work','Extra_work','manager_model','Tna_model'));
             $this->load->helper(array('text','form'));
             $this->load->library(array('form_validation','table'));
-            $this->load->library('My_PHPMailer');
+            //$this->load->library('My_PHPMailer');
             $this->session;     
             $this->load->view('tna/Tna_header');
     }

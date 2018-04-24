@@ -270,21 +270,24 @@
                             <?php  site_url('Tna/today_task'); ?>
                             <a href="<?php echo site_url('Tna/dashboard'); ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
+                         
                         <li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Costing<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">Flot Charts</a>
+                                    <a href="#">Total Expences</a>
                                 </li>
                                 <li>
-                                    <a href="#">Morris.js Charts</a>
+                                    <a href="#">Expences On Styles</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                       
                         <li>
-                            <a href="#"><i class="fa fa-table fa-fw"></i> Tables</a>
+                            <a href="<?php echo site_url('Auth/site_map'); ?>"><i class="fa fa-table fa-fw"></i> Site Map</a>
                         </li>
+                         <?php /*
                         <li>
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Forms</a>
                         </li>
@@ -354,7 +357,7 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                    </ul>
+                    */ ?></ul>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
