@@ -111,7 +111,8 @@ class Tna extends CI_Controller {
     }
     
     function index($startdate=null,$days=90){
-        redirect('Tna/enter_detail');
+        redirect('Tna/dashboard');
+        //redirect('Tna/enter_detail');
         /*$x=array('todayDate' => date('d/m/Y'),'tomorrowDate' => date('d/m/Y', strtotime(' +1 day')),'nextDay' => date('l', strtotime(' +2 day')));*/
        if($startdate==null){
           $startdate='20180409'; 

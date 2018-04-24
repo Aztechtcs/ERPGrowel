@@ -1,3 +1,4 @@
+
 <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -138,12 +139,12 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item">
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small"><em>4 minutes ago</em>
+                            <div class="list-group" ng-app="myApp" ng-controller="myCtrl">
+                                <a href="#" class="list-group-item" ng-repeat="x in records">
+                                    <i class="fa fa-comment fa-fw"></i>{{x.comments}}
+                                    <span class="pull-right text-muted small"><em>{{x.tm}} Hours after</em>
                                     </span>
-                                </a>
+                                </a><?php /*
                                 <a href="#" class="list-group-item">
                                     <i class="fa fa-twitter fa-fw"></i> 3 New Followers
                                     <span class="pull-right text-muted small"><em>12 minutes ago</em>
@@ -184,7 +185,7 @@
                                     <span class="pull-right text-muted small"><em>Yesterday</em>
                                     </span>
                                 </a>
-                            </div>
+                            */ ?></div>
                             <!-- /.list-group -->
                             <a href="#" class="btn btn-default btn-block">View All Alerts</a>
                         </div>
@@ -345,7 +346,14 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="<?php echo site_url('assets/startbootstrap-admin'); ?>/dist/js/sb-admin-2.js"></script>
-
+<script src="<?php echo site_url('assets/angular.min.js'); ?>" ></script>
+<script>
+   
+var app = angular.module("myApp", []);
+app.controller("myCtrl", function($scope) {
+    $scope.records =  <?php echo $this->Tna_model->get_last_commnets();   ?>
+});
+</script>
 </body>
 
 </html>

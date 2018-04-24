@@ -13,6 +13,15 @@ class Tna_model extends CI_Model{
 	ini_set('date.timezone', 'Asia/Kolkata');
     }
    
+    function get_last_commnets(){
+        $q='SELECT `comments`,timestampdiff(hour, `finish_date`,now()) as `tm` FROM `tna_task` WHERE `completed`=1';
+        //$this->db->select(array('comments','timestampdiff(hour, `finish_date`,now()) as `tm`'))->from->('tna_task')->where('completed=1');
+        $r=$this->db->query($q);
+        return json_encode($r->result());
+        //$r=$this->db->get();
+        
+        }
+    
     function add_task($task){
         $this->db->insert('tna_task',$task);
     }
