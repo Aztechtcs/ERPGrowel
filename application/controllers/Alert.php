@@ -84,6 +84,41 @@ if ($err) {
      }
  }
  
+ function testing_cron(){
+    $mobile=$this->get_mobile();
+    $r=$this->Alert_model->pending_task();
+    $message= "Total Pending Task ".sizeof($r);
+    $message.=' Click for Detail '.site_url('Alert/pending_task');
+     foreach($mobile as $mob){
+         $r="test123";
+         //$r=$this->sent_message($message,$mob->phone);
+         $M='{'.$r.'},{'.$mob->phone.'},{'.$message.'}';
+         $this->Alert_model->alert_log($M);
+     }
+ }
+ 
+ function reminder_pending(){
+    $mobile=$this->get_mobile();
+    $r=$this->Alert_model->pending_task();
+    $message= "Total Pending Task ".sizeof($r);
+    $message.=' Click for Detail '.site_url('Alert/pending_task');
+     foreach($mobile as $mob){
+         $r=$this->sent_message($message,$mob->phone);
+         $M='{'.$r.'},{'.$mob->phone.'},{'.$message.'}';
+         $this->Alert_model->alert_log($M);
+     }
+ }
+ 
+ function pending_task(){
+     $r=$this->Alert_model->pending_task();
+     $message= "Total Pending Task ".sizeof($r);
+     $message.='Click for Detail '.site_url('Alert/pending_task');
+     $re['json']=$r;
+     $this->load->view('tna/pending_task',$re);
+     //var_dump($r);
+ }
+ 
+ 
  private function get_mobile(){
      return $this->Alert_model->getmobile_list();
  }

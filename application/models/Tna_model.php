@@ -54,7 +54,7 @@ class Tna_model extends CI_Model{
     
     function update_completeTask($update,$id){
         $this->db->where('id', $id);
-        $this->db->update('Tna_task',$update);
+        $this->db->update('tna_task',$update);
     }
     
     function total_tna($byid=null){

@@ -162,6 +162,8 @@ class Tna extends CI_Controller {
                $db=$this->Extra_work->tna_60();
            }elseif($tna_time==90){
                 $db=$this->Extra_work->tna();
+           }elseif($tna_time==80){
+                $db=$this->Extra_work->tna_80();
            }
            else{
                $db=$this->Extra_work->tna();
