@@ -19,6 +19,7 @@ $links=array(
     'Manager/insert_report'=>'Insert Report',
     'Tna/send_mail'=>'send mail',
     'Tna/today_task'=>'TNA Task',
+    'Tna/download_tna'=>'Download TNA'
     );
 
 ?>

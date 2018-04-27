@@ -27,7 +27,7 @@ class Tna extends CI_Controller {
             $this->load->library(array('form_validation','table'));
             //$this->load->library('My_PHPMailer');
             $this->session;     
-            $this->load->view('tna/Tna_header');
+            $this->load->view('tna/TNA_header');
     }
     
     function dashboard(){
@@ -134,10 +134,21 @@ class Tna extends CI_Controller {
     
     function display_table($tbl=null){
         if($tbl=null){
-            redirect('Tna/enter_detailcc');
+            redirect('Tna/enter_detail');
         }
         var_dump($tbl);
         //echo $this->table->generate($tbl);
+    }
+    
+    
+    function download_tna($order=null){
+         if($order!=null){
+             //$list=$this->Tna_model->get_task_list($order);
+             $this->Tna_model->csv($order);
+         }
+         else{
+            $this->load->view('tna/TNA_download');
+         }
     }
     
    function enter_detail(){
@@ -146,7 +157,16 @@ class Tna extends CI_Controller {
            $dateA=$this->input->post('dateA');
            $dateZ=$this->input->post('dateB');
            $dateY=$this->input->post('dateC');
-           $db=$this->Extra_work->tna();
+           $tna_time=$this->input->post('tna_time');
+           if($tna_time==60){
+               $db=$this->Extra_work->tna_60();
+           }elseif($tna_time==90){
+                $db=$this->Extra_work->tna();
+           }
+           else{
+               $db=$this->Extra_work->tna();
+           }
+           
            $final=array();
            foreach($db as $k=>$v){
                $str=" + $v->endday days";
@@ -170,14 +190,14 @@ class Tna extends CI_Controller {
               // $f=array('id'=>$v->id,'name'=>$v->name,'fixed_date'=>$next,'Day'=>date('l',strtotime($startdate . $str)),'c'=>$order_number);
                $f=array('id'=>null,'name'=>$v->name,'fixed_date'=>$next,'Day'=>date('l',strtotime($startdate . $str)),'Order_Number'=>$order_number);
                $this->Tna_model->add_task($f);
-               array_push($final,$f);
            }
            //var_dump($final);
            
            $d['json']=json_encode($final);
            //$this->display_table($final);
-           
-          $this->load->view('tna/display_tna',$d);
+           $this->load->helper('download');    
+           $this->load->view('tna/display_tna',$d);
+           redirect('Tna/download_tna');
        }
        else{
            //$this->load->view('tna/user_input');

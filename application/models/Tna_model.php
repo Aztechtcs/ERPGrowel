@@ -12,7 +12,33 @@ class Tna_model extends CI_Model{
 	parent::__construct();
 	ini_set('date.timezone', 'Asia/Kolkata');
     }
-   
+    
+    function csv($order_number){
+        $this->load->dbutil();
+        $this->load->helper('file');
+        $this->load->helper('download');
+        $query = $this->db->get_where('tna_task',array('Order_Number'=>$order_number));
+        $delimiter = ",";
+        $newline = "\r\n";
+        $data = $this->dbutil->csv_from_result($query, $delimiter, $newline);
+        force_download($order_number.'.csv', $data);
+    }
+    
+    function get_order_list(){//Working
+        $re=$this->db->query('SELECT distinct `Order_Number` FROM `tna_task` where `completed` =0');
+        return json_encode($re->result());
+    }
+    
+    function get_task_list($order_number){
+        $re=$this->db->get_where('tna_task',array('Order_Number'=>$order_number));
+        return json_encode($re->result());
+    }
+    
+    /* function get_completed_order(){//Done
+        $re=$this->db->query('SELECT distinct `Order_Number` FROM `tna_task` where `completed` =1');
+        return json_encode($re->result());
+    } */
+    
     function get_last_commnets(){
         $q='SELECT `comments`,timestampdiff(hour, `finish_date`,now()) as `tm` FROM `tna_task` WHERE `completed`=1';
         //$this->db->select(array('comments','timestampdiff(hour, `finish_date`,now()) as `tm`'))->from->('tna_task')->where('completed=1');
