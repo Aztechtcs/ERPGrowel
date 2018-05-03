@@ -13,6 +13,18 @@ class Tna_model extends CI_Model{
 	ini_set('date.timezone', 'Asia/Kolkata');
     }
     
+   
+    
+    function update_days(){
+        $d=$this->db->get('tna_task');
+        $da=$d->result();
+        foreach($da as $v){
+            $this->db->where('id', $v->id);
+            //echo date("l",strtotime($v->fixed_date))."<br>";
+            $this->db->update('tna_task',array('Day'=>date("l",strtotime($v->fixed_date))));
+        }
+    }
+    
     function csv($order_number){
         $this->load->dbutil();
         $this->load->helper('file');

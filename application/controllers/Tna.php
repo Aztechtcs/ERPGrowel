@@ -151,6 +151,12 @@ class Tna extends CI_Controller {
          }
     }
     
+    /* ONLY FOR UPDATE DAY ONLY */
+    function update_days(){
+        $this->Tna_model->update_days();
+       //echo date("l",2018-05-01);
+    }
+    
    function enter_detail(){
        if($this->input->post()){
            $order_number=$this->input->post('order_number');
@@ -190,7 +196,7 @@ class Tna extends CI_Controller {
                     $next= date('Y-m-d',strtotime($startdate . $str));
                }
               // $f=array('id'=>$v->id,'name'=>$v->name,'fixed_date'=>$next,'Day'=>date('l',strtotime($startdate . $str)),'c'=>$order_number);
-               $f=array('id'=>null,'name'=>$v->name,'fixed_date'=>$next,'Day'=>date('l',strtotime($startdate . $str)),'Order_Number'=>$order_number);
+               $f=array('id'=>null,'name'=>$v->name,'fixed_date'=>$next,'Day'=>date('l',strtotime($startdate . $str)),'Order_Number'=>$order_number,'department'=>$v->department);
                $this->Tna_model->add_task($f);
            }
            //var_dump($final);

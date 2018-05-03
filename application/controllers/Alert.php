@@ -33,7 +33,7 @@ class Alert extends CI_Controller {
     
   private function sent_message($message,$phone){
     $authkey='212278AQBrPfyBwO5ae077e7';
-    $url="http://api.msg91.com/api/sendhttp.php?sender=MSGIND&route=4&mobiles=$phone&authkey=212278AQBrPfyBwO5ae077e7&country=0&message=$message";
+    $url="http://api.msg91.com/api/sendhttp.php?sender=GROWEL&route=4&mobiles=$phone&authkey=212278AQBrPfyBwO5ae077e7&country=0&message=$message";
     $curl = curl_init();
     curl_setopt_array($curl, array(
     //CURLOPT_URL => "http://control.msg91.com/api/sendotp.php?authkey=$authkey&message=$message&sender=Nasir&mobile=$phone",
@@ -66,6 +66,41 @@ if ($err) {
     //echo $this->sent_message('hiiii 4nd test', 9716942965);
  }   
  
+ function tl($days,$dep_id){
+      $task_list=$this->Alert_model->get_taskRBD($days,$dep_id); 
+      $json=array();
+      foreach($task_list as $v){
+          array_push($json,array('id'=>$v->id,'name'=>$v->name,'fixed_date'=>$v->fixed_date,'Order_Number'=>$v->Order_Number));
+      }
+      $db['json']=$json;
+      $this->load->view('tna/pending_task',$db);
+ }
+ 
+ function reminder_byid($id=null){
+     $depart=$this->Alert_model->get_departments();
+     foreach($depart as $v){
+         $mobiles=$this->Alert_model->get_mobiles($v->id);
+         $task_list=$this->Alert_model->get_taskRBD($v->rbd,$v->id); /*REMINDER BEFORE DAYS*/
+         //var_dump($task_list);
+         foreach($mobiles as $monlst){
+             if(sizeof($task_list)==0){
+               $message= 'Hi '.$monlst->name.' Good Morning '.$this->Alert_model->quote();
+             }else{
+               $message='Hi '.$monlst->name.', '. sizeof($task_list).' Pending Work for you Click '.site_url('Alert/tl/').$v->rbd.'/'.$v->id.' ';
+            //$r="testdemo";
+            $r=$this->sent_message($message,$monlst->phone);
+            $M='{"'.$r.'"},{"'.$monlst->phone.'"},{"'.$message.'"}';
+            $this->Alert_model->alert_log($M);
+            echo $monlst->phone.$message;   
+             }
+         }
+        // var_dump($v);
+         //var_dump($mobiles);
+         //var_dump($task_list);   
+     }
+     //var_dump($depart);
+ }
+ 
  function reminder(){
      $mobile=$this->get_mobile();
      $today_task=$this->get_today_task();
@@ -78,7 +113,8 @@ if ($err) {
      }
     // echo $message;
      foreach($mobile as $mob){
-         $r=$this->sent_message($message,$mob->phone);
+         //$r=$this->sent_message($message,$mob->phone);
+         $r='test';
          $M='{'.$r.'},{'.$mob->phone.'},{'.$message.'}';
          $this->Alert_model->alert_log($M);
      }
