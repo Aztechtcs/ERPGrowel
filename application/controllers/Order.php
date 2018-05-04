@@ -38,6 +38,17 @@ class Order extends CI_Controller {
     }
     
     function put_detail(){
+        if($this->input->post('get_template')){
+            $Content = "Name,address,mobileno,email\n";
+            $FileName = "Myfile-".date("d-m-y-h:i:s").".csv";
+            header('Content-Type: application/csv'); 
+            header('Content-Disposition: attachment; filename="' . $FileName . '"'); 
+            echo $Content;
+            exit();
+        }
+        elseif($this->input->post('upload_template_data')){
+            
+        }
         $this->load->view('order/put_detail');
     }
 }
