@@ -32,6 +32,8 @@ class Manager extends CI_Controller {
             $this->session;             
     }
     
+   
+    
     function list_order(){
        //$this->load->view('part_header');
        $ol= $this->manager_model->list_order();
