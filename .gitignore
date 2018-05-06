@@ -1,1 +1,9 @@
 !ignore upload/
+
+!app/
+
+app/*
+!app/bower_components/
+
+app/bower_components/*
+!app/bower_components/highcharts/
