@@ -1,4 +1,5 @@
 !ignore upload/
+ignore upload/*
 
 !app/
 
