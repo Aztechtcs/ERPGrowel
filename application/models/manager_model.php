@@ -184,6 +184,10 @@ class manager_model extends CI_Model{
 	ini_set('date.timezone', 'Asia/Kolkata');
     }
     
+    function get_style(){
+        
+    }
+    
     function get_order($id,$op_id=null){
         $res=$this->db->get_where('order',array('number'=>$id));
         return $res->result();
