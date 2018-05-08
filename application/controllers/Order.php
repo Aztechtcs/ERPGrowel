@@ -46,9 +46,8 @@ class Order extends CI_Controller {
     }
     
     function mailsent($html=null){
-        
-        $to=array('ph9716942965@gmail.com');
        
+        $to=array('ph9716942965@gmail.com');
         foreach($to as $v){
             
                      $htmlContent = '<h1>NEW ORDER insert detail</h1>';
@@ -94,23 +93,23 @@ class Order extends CI_Controller {
             echo $Content;
             exit();}elseif($this->input->post('upload_template_data')){  }*/
         if($this->input->post('submit')){
-            //$buyer_name=$this->input->post('buyer_name');
-            $Style_id=$this->input->post('style_id');
+            $buyer_name=ucfirst($this->input->post('buyer_name'));
+            $Style_id=ucfirst($this->input->post('style_id'));
             $html='';
             $this->input->post('price');
-            $order_number=$this->input->post('order_number');
+            $order_number=ucfirst($this->input->post('order_number'));
             $tna_time=$this->input->post('tna_time');
             $dateA=$this->input->post('dateA');
             
-            $color=$this->input->post('color');
-            $size=$this->input->post('size');
+            $color=ucfirst($this->input->post('color'));
+            $size=ucfirst($this->input->post('size'));
             $quantity=$this->input->post('quantity');
             $c=0;
             $this->table->set_heading('number', 'Color', 'Size','quantity','Style Number','Buyer Name');
             $table=array();
             while(sizeof($color)>$c){
-                array_push($table, array($this->input->post('order_number') ,$color[$c] ,$size[$c],$quantity[$c],$Style_id,$this->input->post('buyer_name')));
-                $this->manager_model->add_order(array('number'=>$this->input->post('order_number'),'color'=>$color[$c],'size'=>$size[$c],'quantity'=>$quantity[$c],'Style_id'=>$Style_id,'buyer_name'=>$this->input->post('buyer_name')));
+                array_push($table, array($order_number,$color[$c] ,$size[$c],$quantity[$c],$Style_id,$buyer_name));
+                $this->manager_model->add_order(array('number'=>$order_number,'color'=>$color[$c],'size'=>$size[$c],'quantity'=>$quantity[$c],'Style_id'=>$Style_id,'buyer_name'=>$buyer_name));
                 $c++;
             }
             $html.=$this->table->generate($table);
@@ -147,7 +146,7 @@ class Order extends CI_Controller {
                     $next= date('Y-m-d',strtotime($startdate . $str));
                }
               // $f=array('id'=>$v->id,'name'=>$v->name,'fixed_date'=>$next,'Day'=>date('l',strtotime($startdate . $str)),'c'=>$order_number);
-               $f=array('id'=>null,'name'=>$v->name,'fixed_date'=>$next,'Day'=>date('l',strtotime($startdate . $str)),'Order_Number'=>$order_number,'department'=>$v->department);
+               $f=array('id'=>null,'name'=>ucfirst($v->name),'fixed_date'=>$next,'Day'=>date('l',strtotime($startdate . $str)),'Order_Number'=>$order_number,'department'=>$v->department);
                $this->Tna_model->add_task($f);
            }
            $html.='<br>'.site_url('Tna/download_tna/').$order_number;
