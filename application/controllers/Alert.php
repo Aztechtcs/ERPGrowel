@@ -31,7 +31,7 @@ class Alert extends CI_Controller {
             //$this->load->view('tna/TNA_header');
     }
     
-  private function sent_message($message,$phone){
+  function sent_message($message,$phone){
     $authkey='212278AQBrPfyBwO5ae077e7';
     $url="http://api.msg91.com/api/sendhttp.php?sender=GROWEL&route=4&mobiles=$phone&authkey=212278AQBrPfyBwO5ae077e7&country=0&message=$message";
     $curl = curl_init();
@@ -136,11 +136,13 @@ if ($err) {
  function reminder_pending(){
     $mobile=$this->get_mobile();
     $r=$this->Alert_model->pending_task();
-    $message= "Warning: Hi You might Face difficulty Because of Delay Task ".sizeof($r);
-    $message.=' Click for Detail '.site_url('Alert/pending_task');
-    if(sizeof($r)==0){
+    $message= "Warning: You might Face difficulty Because of Delay Task ".sizeof($r);
+    $message.=' click for detail '.site_url('Alert/pending_task');
+    if(sizeof($r)<1){
         $message="Evening is a time of real experimentation, you never want to look the same way. Good Evening. ...";
     }
+    //$message="SORRY Please Ignore the above message Logical mistake . ";
+    
     foreach($mobile as $mob){
          $r=$this->sent_message($message,$mob->phone);
          $M='{'.$r.'},{'.$mob->phone.'},{'.$message.'}';
