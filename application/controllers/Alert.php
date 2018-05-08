@@ -136,18 +136,21 @@ if ($err) {
  function reminder_pending(){
     $mobile=$this->get_mobile();
     $r=$this->Alert_model->pending_task();
-    $message= "Total Pending Task ".sizeof($r);
+    $message= "Warning: Hi You might Face difficulty Because of Delay Task ".sizeof($r);
     $message.=' Click for Detail '.site_url('Alert/pending_task');
-     foreach($mobile as $mob){
+    if(sizeof($r)==0){
+        $message="Evening is a time of real experimentation, you never want to look the same way. Good Evening. ...";
+    }
+    foreach($mobile as $mob){
          $r=$this->sent_message($message,$mob->phone);
          $M='{'.$r.'},{'.$mob->phone.'},{'.$message.'}';
          $this->Alert_model->alert_log($M);
-     }
+    }
  }
  
  function pending_task(){
      $r=$this->Alert_model->pending_task();
-     $message= "Total Pending Task ".sizeof($r);
+     $message= "Warning: Hi You might Face difficulty Because of Delay Task  ".sizeof($r);
      $message.='Click for Detail '.site_url('Alert/pending_task');
      $re['json']=$r;
      $this->load->view('tna/pending_task',$re);
