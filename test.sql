@@ -1,20 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
--- http://www.phpmyadmin.net
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 03, 2018 at 10:18 AM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Host: 127.0.0.1:3306
+-- Generation Time: May 08, 2018 at 06:01 AM
+-- Server version: 5.7.21
+-- PHP Version: 5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `test`
@@ -26,6 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `buyer`
 --
 
+DROP TABLE IF EXISTS `buyer`;
 CREATE TABLE IF NOT EXISTS `buyer` (
   `name` varchar(30) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -59,13 +62,14 @@ INSERT INTO `buyer` (`name`, `date`) VALUES
 -- Table structure for table `department`
 --
 
+DROP TABLE IF EXISTS `department`;
 CREATE TABLE IF NOT EXISTS `department` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `rbd` int(11) NOT NULL COMMENT 'Reminder Before Days',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `department`
@@ -84,7 +88,9 @@ INSERT INTO `department` (`id`, `name`, `rbd`) VALUES
 
 --
 -- Stand-in structure for view `get_work`
+-- (See below for the actual view)
 --
+DROP VIEW IF EXISTS `get_work`;
 CREATE TABLE IF NOT EXISTS `get_work` (
 `id` int(11)
 ,`byuser_id` int(11)
@@ -94,18 +100,20 @@ CREATE TABLE IF NOT EXISTS `get_work` (
 ,`ConsumeTime` bigint(21)
 ,`comment` varchar(400)
 );
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `material_flow`
 --
 
+DROP TABLE IF EXISTS `material_flow`;
 CREATE TABLE IF NOT EXISTS `material_flow` (
   `int` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(250) NOT NULL,
   PRIMARY KEY (`int`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `material_flow`
@@ -125,6 +133,7 @@ INSERT INTO `material_flow` (`int`, `name`) VALUES
 -- Table structure for table `mobile`
 --
 
+DROP TABLE IF EXISTS `mobile`;
 CREATE TABLE IF NOT EXISTS `mobile` (
   `phone` varchar(12) NOT NULL,
   `name` varchar(30) NOT NULL,
@@ -154,13 +163,14 @@ INSERT INTO `mobile` (`phone`, `name`, `type`, `department_id`) VALUES
 -- Table structure for table `mobile_log`
 --
 
+DROP TABLE IF EXISTS `mobile_log`;
 CREATE TABLE IF NOT EXISTS `mobile_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `message` varchar(500) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=310 ;
+) ENGINE=InnoDB AUTO_INCREMENT=310 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `mobile_log`
@@ -224,258 +234,258 @@ INSERT INTO `mobile_log` (`id`, `message`, `datetime`) VALUES
 (55, '{testdemo},{9891744388},{Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>}', '2018-05-02 09:19:44'),
 (56, '{testdemo},{9891726238},{Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>}', '2018-05-02 09:19:44'),
 (57, '{testdemo},{8800940916},{Hi Ravinder Master Good Morning Enjoy <br>}', '2018-05-02 09:19:44'),
-(58, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:30:08'),
-(59, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:30:08'),
-(60, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:30:08'),
-(61, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:30:08'),
-(62, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:30:08'),
-(63, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:30:08'),
-(64, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:30:08'),
-(65, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Enjoy <br>"}', '2018-05-02 09:30:08'),
-(66, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:31:22'),
-(67, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:31:22'),
-(68, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:31:22'),
-(69, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:31:22'),
-(70, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:31:22'),
-(71, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:31:22'),
-(72, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:31:22'),
-(73, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Enjoy <br>"}', '2018-05-02 09:31:22'),
-(74, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:20'),
-(75, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:20'),
-(76, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:20'),
-(77, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:20'),
-(78, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:20'),
-(79, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:20'),
-(80, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:40:20'),
-(81, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day"}', '2018-05-02 09:40:20'),
-(82, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:23'),
-(83, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:23'),
-(84, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:23'),
-(85, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:23'),
-(86, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:23'),
-(87, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:23'),
-(88, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:40:23'),
-(89, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Set a goal that makes you want to jump out of bed in the morning"}', '2018-05-02 09:40:23'),
-(90, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:24'),
-(91, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:24'),
-(92, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:24'),
-(93, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:24'),
-(94, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:24'),
-(95, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:24'),
-(96, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:40:24'),
-(97, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning When you start each day with a grateful heart"}', '2018-05-02 09:40:24'),
-(98, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:26'),
-(99, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:26'),
-(100, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:26'),
-(101, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:26'),
-(102, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:26'),
-(103, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:26'),
-(104, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:40:26'),
-(105, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Having a rough morning?"}', '2018-05-02 09:40:26'),
-(106, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:27'),
-(107, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:27'),
-(108, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:27'),
-(109, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:27'),
-(110, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:28'),
-(111, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:28'),
-(112, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:40:28'),
-(113, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Set a goal that makes you want to jump out of bed in the morning"}', '2018-05-02 09:40:28'),
-(114, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:29'),
-(115, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:29'),
-(116, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:29'),
-(117, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:29'),
-(118, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:29'),
-(119, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:29'),
-(120, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:40:29'),
-(121, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day"}', '2018-05-02 09:40:29'),
-(122, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:31'),
-(123, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:31'),
-(124, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:31'),
-(125, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:31'),
-(126, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:31'),
-(127, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:31'),
-(128, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:40:31'),
-(129, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Having a rough morning?"}', '2018-05-02 09:40:31'),
-(130, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:33'),
-(131, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:33'),
-(132, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:33'),
-(133, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:33'),
-(134, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:34'),
-(135, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:34'),
-(136, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:40:34'),
-(137, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning "}', '2018-05-02 09:40:34'),
-(138, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:51'),
-(139, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:51'),
-(140, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:51'),
-(141, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:51'),
-(142, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:51'),
-(143, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:51'),
-(144, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:40:51'),
-(145, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day"}', '2018-05-02 09:40:51'),
-(146, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:53'),
-(147, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:53'),
-(148, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:53'),
-(149, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:53'),
-(150, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:53'),
-(151, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:53'),
-(152, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:40:53'),
-(153, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day"}', '2018-05-02 09:40:53'),
-(154, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:55'),
-(155, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:55'),
-(156, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:55'),
-(157, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:55'),
-(158, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:55'),
-(159, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:55'),
-(160, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:40:55'),
-(161, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Having a rough morning?"}', '2018-05-02 09:40:55'),
-(162, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:56'),
-(163, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:57'),
-(164, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:57'),
-(165, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:57'),
-(166, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:57'),
-(167, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:57'),
-(168, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:40:57'),
-(169, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning When you start each day with a grateful heart"}', '2018-05-02 09:40:57'),
-(170, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:58'),
-(171, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:58'),
-(172, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:58'),
-(173, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:58'),
-(174, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:58'),
-(175, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:40:58'),
-(176, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:40:58'),
-(177, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Having a rough morning?"}', '2018-05-02 09:40:58'),
-(178, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:00'),
-(179, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:00'),
-(180, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:00'),
-(181, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:00'),
-(182, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:00'),
-(183, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:00'),
-(184, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:41:00'),
-(185, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day"}', '2018-05-02 09:41:00'),
-(186, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:01'),
-(187, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:01'),
-(188, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:01'),
-(189, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:01'),
-(190, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:01'),
-(191, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:01'),
-(192, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:41:01'),
-(193, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day"}', '2018-05-02 09:41:01'),
-(194, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:04'),
-(195, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:04'),
-(196, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:04'),
-(197, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:04'),
-(198, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:04'),
-(199, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:04'),
-(200, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:41:04'),
-(201, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning When you start each day with a grateful heart"}', '2018-05-02 09:41:04'),
-(202, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:06'),
-(203, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:06'),
-(204, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:06'),
-(205, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:06'),
-(206, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:06'),
-(207, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:06'),
-(208, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:41:06'),
-(209, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning When you start each day with a grateful heart"}', '2018-05-02 09:41:06'),
-(210, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:07'),
-(211, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:07'),
-(212, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:07'),
-(213, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:07'),
-(214, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:07'),
-(215, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:07'),
-(216, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:41:07'),
-(217, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day"}', '2018-05-02 09:41:07'),
-(218, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:08'),
-(219, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:08'),
-(220, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:08'),
-(221, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:08'),
-(222, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:08'),
-(223, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:08'),
-(224, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:41:08'),
-(225, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Rise up, start fresh see the bright opportunity in each day"}', '2018-05-02 09:41:08'),
-(226, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:09'),
-(227, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:10'),
-(228, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:10'),
-(229, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:10'),
-(230, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:10'),
-(231, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:10'),
-(232, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:41:10'),
-(233, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Set a goal that makes you want to jump out of bed in the morning"}', '2018-05-02 09:41:10'),
-(234, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:11'),
-(235, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:11'),
-(236, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:11'),
-(237, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:11'),
-(238, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:11'),
-(239, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:11'),
-(240, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:41:11'),
-(241, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Having a rough morning?"}', '2018-05-02 09:41:11'),
-(242, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:12'),
-(243, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:12'),
-(244, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:12'),
-(245, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:12'),
-(246, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:12'),
-(247, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:12'),
-(248, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:41:12'),
-(249, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning When you start each day with a grateful heart"}', '2018-05-02 09:41:12'),
-(250, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:14'),
-(251, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:14'),
-(252, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:14'),
-(253, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:14'),
-(254, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:14'),
-(255, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:14'),
-(256, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:41:14'),
-(257, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Rise up, start fresh see the bright opportunity in each day"}', '2018-05-02 09:41:14'),
-(258, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:21'),
-(259, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:21'),
-(260, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:21'),
-(261, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:21'),
-(262, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:21'),
-(263, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:21'),
-(264, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:41:21'),
-(265, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Having a rough morning?"}', '2018-05-02 09:41:21'),
-(266, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:24'),
-(267, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:24'),
-(268, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:24'),
-(269, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:24'),
-(270, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:24'),
-(271, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:24'),
-(272, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:41:24'),
-(273, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day"}', '2018-05-02 09:41:24'),
-(274, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:30'),
-(275, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:30'),
-(276, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:30'),
-(277, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:30'),
-(278, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:30'),
-(279, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:41:30'),
-(280, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:41:31'),
-(281, '{"testdemo"},{"8800940916"},{"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day"}', '2018-05-02 09:41:31'),
-(282, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:43:18'),
-(283, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:43:18'),
-(284, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:43:18'),
-(285, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:43:18'),
-(286, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:43:18'),
-(287, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:43:18'),
-(288, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:43:18'),
-(289, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:43:59'),
-(290, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:43:59'),
-(291, '{"testdemo"},{"9818899215"},{"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:43:59'),
-(292, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:43:59'),
-(293, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:43:59'),
-(294, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:43:59'),
-(295, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:43:59'),
-(296, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:58:33'),
-(297, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:58:33'),
-(298, '{"testdemo"},{"9818899215"},{"Hi Sanjay Gulati, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:58:33'),
-(299, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:58:33'),
-(300, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:58:33'),
-(301, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 09:58:33'),
-(302, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 09:58:33'),
-(303, '{"testdemo"},{"9205129389"},{"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 10:04:35'),
-(304, '{"testdemo"},{"9716942965"},{"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 10:04:35'),
-(305, '{"testdemo"},{"9818899215"},{"Hi Sanjay Gulati, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 10:04:35'),
-(306, '{"testdemo"},{"9821685057"},{"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 10:04:36'),
-(307, '{"testdemo"},{"9873146399"},{"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 10:04:36'),
-(308, '{"testdemo"},{"9891744388"},{"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>"}', '2018-05-02 10:04:36'),
-(309, '{"testdemo"},{"9891726238"},{"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>"}', '2018-05-02 10:04:36');
+(58, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:30:08'),
+(59, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:30:08'),
+(60, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:30:08'),
+(61, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:30:08'),
+(62, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:30:08'),
+(63, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:30:08'),
+(64, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:30:08'),
+(65, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Enjoy <br>\"}', '2018-05-02 09:30:08'),
+(66, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:31:22'),
+(67, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:31:22'),
+(68, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:31:22'),
+(69, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:31:22'),
+(70, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:31:22'),
+(71, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:31:22'),
+(72, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:31:22'),
+(73, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Enjoy <br>\"}', '2018-05-02 09:31:22'),
+(74, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:20'),
+(75, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:20'),
+(76, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:20'),
+(77, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:20'),
+(78, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:20'),
+(79, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:20'),
+(80, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:40:20'),
+(81, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day\"}', '2018-05-02 09:40:20'),
+(82, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:23'),
+(83, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:23'),
+(84, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:23'),
+(85, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:23'),
+(86, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:23'),
+(87, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:23'),
+(88, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:40:23'),
+(89, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Set a goal that makes you want to jump out of bed in the morning\"}', '2018-05-02 09:40:23'),
+(90, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:24'),
+(91, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:24'),
+(92, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:24'),
+(93, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:24'),
+(94, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:24'),
+(95, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:24'),
+(96, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:40:24'),
+(97, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning When you start each day with a grateful heart\"}', '2018-05-02 09:40:24'),
+(98, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:26'),
+(99, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:26'),
+(100, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:26'),
+(101, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:26'),
+(102, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:26'),
+(103, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:26'),
+(104, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:40:26'),
+(105, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Having a rough morning?\"}', '2018-05-02 09:40:26'),
+(106, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:27'),
+(107, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:27'),
+(108, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:27'),
+(109, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:27'),
+(110, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:28'),
+(111, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:28'),
+(112, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:40:28'),
+(113, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Set a goal that makes you want to jump out of bed in the morning\"}', '2018-05-02 09:40:28'),
+(114, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:29'),
+(115, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:29'),
+(116, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:29'),
+(117, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:29'),
+(118, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:29'),
+(119, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:29'),
+(120, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:40:29'),
+(121, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day\"}', '2018-05-02 09:40:29'),
+(122, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:31'),
+(123, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:31'),
+(124, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:31'),
+(125, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:31'),
+(126, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:31'),
+(127, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:31'),
+(128, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:40:31'),
+(129, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Having a rough morning?\"}', '2018-05-02 09:40:31'),
+(130, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:33'),
+(131, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:33'),
+(132, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:33'),
+(133, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:33'),
+(134, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:34'),
+(135, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:34'),
+(136, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:40:34'),
+(137, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning \"}', '2018-05-02 09:40:34'),
+(138, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:51'),
+(139, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:51'),
+(140, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:51'),
+(141, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:51'),
+(142, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:51'),
+(143, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:51'),
+(144, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:40:51'),
+(145, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day\"}', '2018-05-02 09:40:51'),
+(146, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:53'),
+(147, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:53'),
+(148, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:53'),
+(149, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:53'),
+(150, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:53'),
+(151, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:53'),
+(152, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:40:53'),
+(153, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day\"}', '2018-05-02 09:40:53'),
+(154, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:55'),
+(155, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:55'),
+(156, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:55'),
+(157, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:55'),
+(158, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:55'),
+(159, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:55'),
+(160, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:40:55'),
+(161, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Having a rough morning?\"}', '2018-05-02 09:40:55'),
+(162, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:56'),
+(163, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:57'),
+(164, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:57'),
+(165, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:57'),
+(166, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:57'),
+(167, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:57'),
+(168, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:40:57'),
+(169, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning When you start each day with a grateful heart\"}', '2018-05-02 09:40:57'),
+(170, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:58'),
+(171, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:58'),
+(172, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:58'),
+(173, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:58'),
+(174, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:58'),
+(175, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:40:58'),
+(176, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:40:58'),
+(177, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Having a rough morning?\"}', '2018-05-02 09:40:58'),
+(178, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:00'),
+(179, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:00'),
+(180, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:00'),
+(181, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:00'),
+(182, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:00'),
+(183, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:00'),
+(184, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:41:00'),
+(185, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day\"}', '2018-05-02 09:41:00'),
+(186, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:01'),
+(187, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:01'),
+(188, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:01'),
+(189, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:01'),
+(190, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:01'),
+(191, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:01'),
+(192, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:41:01'),
+(193, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day\"}', '2018-05-02 09:41:01'),
+(194, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:04'),
+(195, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:04'),
+(196, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:04'),
+(197, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:04'),
+(198, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:04'),
+(199, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:04'),
+(200, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:41:04'),
+(201, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning When you start each day with a grateful heart\"}', '2018-05-02 09:41:04'),
+(202, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:06'),
+(203, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:06'),
+(204, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:06'),
+(205, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:06'),
+(206, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:06'),
+(207, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:06'),
+(208, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:41:06'),
+(209, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning When you start each day with a grateful heart\"}', '2018-05-02 09:41:06'),
+(210, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:07'),
+(211, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:07'),
+(212, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:07'),
+(213, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:07'),
+(214, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:07'),
+(215, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:07'),
+(216, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:41:07'),
+(217, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day\"}', '2018-05-02 09:41:07'),
+(218, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:08'),
+(219, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:08'),
+(220, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:08'),
+(221, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:08'),
+(222, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:08'),
+(223, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:08'),
+(224, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:41:08'),
+(225, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Rise up, start fresh see the bright opportunity in each day\"}', '2018-05-02 09:41:08'),
+(226, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:09'),
+(227, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:10'),
+(228, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:10'),
+(229, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:10'),
+(230, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:10'),
+(231, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:10'),
+(232, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:41:10'),
+(233, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Set a goal that makes you want to jump out of bed in the morning\"}', '2018-05-02 09:41:10'),
+(234, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:11'),
+(235, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:11'),
+(236, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:11'),
+(237, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:11'),
+(238, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:11'),
+(239, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:11'),
+(240, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:41:11'),
+(241, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Having a rough morning?\"}', '2018-05-02 09:41:11'),
+(242, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:12'),
+(243, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:12'),
+(244, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:12'),
+(245, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:12'),
+(246, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:12'),
+(247, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:12'),
+(248, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:41:12'),
+(249, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning When you start each day with a grateful heart\"}', '2018-05-02 09:41:12'),
+(250, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:14'),
+(251, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:14'),
+(252, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:14'),
+(253, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:14'),
+(254, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:14'),
+(255, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:14'),
+(256, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:41:14'),
+(257, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Rise up, start fresh see the bright opportunity in each day\"}', '2018-05-02 09:41:14'),
+(258, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:21'),
+(259, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:21'),
+(260, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:21'),
+(261, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:21'),
+(262, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:21'),
+(263, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:21'),
+(264, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:41:21'),
+(265, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Having a rough morning?\"}', '2018-05-02 09:41:21'),
+(266, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:24'),
+(267, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:24'),
+(268, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:24'),
+(269, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:24'),
+(270, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:24'),
+(271, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:24'),
+(272, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:41:24'),
+(273, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day\"}', '2018-05-02 09:41:24'),
+(274, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:30'),
+(275, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:30'),
+(276, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:30'),
+(277, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:30'),
+(278, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:30'),
+(279, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:41:30'),
+(280, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:41:31'),
+(281, '{\"testdemo\"},{\"8800940916\"},{\"Hi Ravinder Master Good Morning Everyday may not be good, but there is something good in every day\"}', '2018-05-02 09:41:31'),
+(282, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:43:18'),
+(283, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:43:18'),
+(284, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:43:18'),
+(285, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:43:18'),
+(286, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:43:18'),
+(287, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:43:18'),
+(288, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:43:18'),
+(289, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:43:59'),
+(290, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:43:59'),
+(291, '{\"testdemo\"},{\"9818899215\"},{\"Hi Director, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:43:59'),
+(292, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:43:59'),
+(293, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:43:59'),
+(294, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:43:59'),
+(295, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:43:59'),
+(296, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:58:33'),
+(297, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:58:33'),
+(298, '{\"testdemo\"},{\"9818899215\"},{\"Hi Sanjay Gulati, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:58:33'),
+(299, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:58:33'),
+(300, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:58:33'),
+(301, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 09:58:33'),
+(302, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 09:58:33'),
+(303, '{\"testdemo\"},{\"9205129389\"},{\"Hi Sunaina, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 10:04:35'),
+(304, '{\"testdemo\"},{\"9716942965\"},{\"Hi Nasiruddin, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 10:04:35'),
+(305, '{\"testdemo\"},{\"9818899215\"},{\"Hi Sanjay Gulati, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 10:04:35'),
+(306, '{\"testdemo\"},{\"9821685057\"},{\"Hi Kavita, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 10:04:36'),
+(307, '{\"testdemo\"},{\"9873146399\"},{\"Hi Mahendra, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 10:04:36'),
+(308, '{\"testdemo\"},{\"9891744388\"},{\"Hi Archana, 4 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/2/1 <br>\"}', '2018-05-02 10:04:36'),
+(309, '{\"testdemo\"},{\"9891726238\"},{\"Hi vijay master, 1 Pending Work for you Click http://127.0.0.1/ERPGrowel/Alert/tl/15/2 <br>\"}', '2018-05-02 10:04:36');
 
 -- --------------------------------------------------------
 
@@ -483,11 +493,12 @@ INSERT INTO `mobile_log` (`id`, `message`, `datetime`) VALUES
 -- Table structure for table `operation`
 --
 
+DROP TABLE IF EXISTS `operation`;
 CREATE TABLE IF NOT EXISTS `operation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `operation`
@@ -503,50 +514,53 @@ INSERT INTO `operation` (`id`, `name`) VALUES
 -- Table structure for table `order`
 --
 
+DROP TABLE IF EXISTS `order`;
 CREATE TABLE IF NOT EXISTS `order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `number` varchar(45) NOT NULL,
   `color` varchar(45) NOT NULL,
   `size` varchar(20) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `Style_id` int(11) NOT NULL,
+  `Style_id` varchar(12) NOT NULL,
   `buyer_name` varchar(45) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `order`
 --
 
 INSERT INTO `order` (`id`, `number`, `color`, `size`, `quantity`, `Style_id`, `buyer_name`, `datetime`) VALUES
-(2, 'njkda', 'nk', '', 909, 0, '', '2018-03-30 11:07:29'),
-(3, 'abc', 'red', '', 1000, 0, '', '2018-03-30 11:09:15'),
-(4, 'ksaj', 'ksaj', '', 9, 5, 'ksaj', '2018-03-30 12:09:42'),
-(5, 'ikjik', 'jikj', '', 898, 6, 'kjas', '2018-03-30 12:09:49'),
-(6, 'jkia', 'ko', '', 9, 3, 'kjas', '2018-03-30 12:10:39'),
-(7, 'nso', 'Red', '', 1000, 2, 'Kokaidi', '2018-03-30 12:16:27'),
-(8, 'jk', '89', '', 890, 7, 'jk', '2018-03-30 12:23:04'),
-(9, '78', 'hju', '', 89, 7, 'nk', '2018-03-30 12:23:58'),
-(10, 'abc', 'red', '', 100, 8, 'Kokaidi', '2018-03-30 12:28:41'),
-(11, 'monoprix_1', 'red', '', 1080, 9, 'monoprix', '2018-03-30 12:39:27'),
-(12, 'order_ABC', 'red', '', 600, 10, 'Bhartiye', '2018-04-02 05:09:04'),
-(13, 'hj', 'uw', '', 89, 11, 'absh', '2018-04-02 05:28:30'),
-(14, '2856b', 'red', '', 70, 10, 'Kokaidi', '2018-04-02 08:01:18'),
-(15, '7', 'red', 'M', 100, 12, 'nasiruddin', '2018-04-02 10:44:00'),
-(16, '7', 'red', 'S', 105, 12, 'nasiruddin', '2018-04-02 10:44:00'),
-(17, '123', 'black', 'm', 257, 13, 'rishi', '2018-04-02 11:13:46'),
-(18, '123', 'black', 's', 1000, 13, 'rishi', '2018-04-02 11:13:46'),
-(19, 'order1', 'red', 'm', 50, 14, 'neha', '2018-04-02 11:16:59'),
-(20, 'order1', 'red', 'xl', 100, 14, 'neha', '2018-04-02 11:16:59'),
-(21, 'order1', 'red', 's', 120, 14, 'neha', '2018-04-02 11:16:59'),
-(22, 'order1', 'black', 's', 40, 14, 'neha', '2018-04-02 11:16:59'),
-(23, 'or1', 'red', 's', 100, 15, 'neha', '2018-04-02 11:44:02'),
-(24, 'or1', 'red', 'm', 120, 15, 'neha', '2018-04-02 11:44:02'),
-(25, 'or1', 'red', 'l', 150, 15, 'neha', '2018-04-02 11:44:02'),
-(26, 'manishor1', 'Red', 'M', 100, 16, 'manish', '2018-04-13 05:04:33'),
-(27, 'manishor1', 'Red', 'L', 20, 16, 'manish', '2018-04-13 05:04:33'),
-(28, 'manishor1', 'Orange', 'XL', 120, 16, 'manish', '2018-04-13 05:04:33');
+(2, 'njkda', 'nk', '', 909, '0', '', '2018-03-30 11:07:29'),
+(3, 'abc', 'red', '', 1000, '0', '', '2018-03-30 11:09:15'),
+(4, 'ksaj', 'ksaj', '', 9, '5', 'ksaj', '2018-03-30 12:09:42'),
+(5, 'ikjik', 'jikj', '', 898, '6', 'kjas', '2018-03-30 12:09:49'),
+(6, 'jkia', 'ko', '', 9, '3', 'kjas', '2018-03-30 12:10:39'),
+(7, 'nso', 'Red', '', 1000, '2', 'Kokaidi', '2018-03-30 12:16:27'),
+(8, 'jk', '89', '', 890, '7', 'jk', '2018-03-30 12:23:04'),
+(9, '78', 'hju', '', 89, '7', 'nk', '2018-03-30 12:23:58'),
+(10, 'abc', 'red', '', 100, '8', 'Kokaidi', '2018-03-30 12:28:41'),
+(11, 'monoprix_1', 'red', '', 1080, '9', 'monoprix', '2018-03-30 12:39:27'),
+(12, 'order_ABC', 'red', '', 600, '10', 'Bhartiye', '2018-04-02 05:09:04'),
+(13, 'hj', 'uw', '', 89, '11', 'absh', '2018-04-02 05:28:30'),
+(14, '2856b', 'red', '', 70, '10', 'Kokaidi', '2018-04-02 08:01:18'),
+(15, '7', 'red', 'M', 100, '12', 'nasiruddin', '2018-04-02 10:44:00'),
+(16, '7', 'red', 'S', 105, '12', 'nasiruddin', '2018-04-02 10:44:00'),
+(17, '123', 'black', 'm', 257, '13', 'rishi', '2018-04-02 11:13:46'),
+(18, '123', 'black', 's', 1000, '13', 'rishi', '2018-04-02 11:13:46'),
+(19, 'order1', 'red', 'm', 50, '14', 'neha', '2018-04-02 11:16:59'),
+(20, 'order1', 'red', 'xl', 100, '14', 'neha', '2018-04-02 11:16:59'),
+(21, 'order1', 'red', 's', 120, '14', 'neha', '2018-04-02 11:16:59'),
+(22, 'order1', 'black', 's', 40, '14', 'neha', '2018-04-02 11:16:59'),
+(23, 'or1', 'red', 's', 100, '15', 'neha', '2018-04-02 11:44:02'),
+(24, 'or1', 'red', 'm', 120, '15', 'neha', '2018-04-02 11:44:02'),
+(25, 'or1', 'red', 'l', 150, '15', 'neha', '2018-04-02 11:44:02'),
+(26, 'manishor1', 'Red', 'M', 100, '16', 'manish', '2018-04-13 05:04:33'),
+(27, 'manishor1', 'Red', 'L', 20, '16', 'manish', '2018-04-13 05:04:33'),
+(28, 'manishor1', 'Orange', 'XL', 120, '16', 'manish', '2018-04-13 05:04:33'),
+(29, 'on123', 'Red', 'M', 100, '0', 'buyernm', '2018-05-08 05:03:05'),
+(30, 'on123', 'Orange', 'L', 120, '0', 'buyernm', '2018-05-08 05:03:06');
 
 -- --------------------------------------------------------
 
@@ -554,6 +568,7 @@ INSERT INTO `order` (`id`, `number`, `color`, `size`, `quantity`, `Style_id`, `b
 -- Table structure for table `order_processed`
 --
 
+DROP TABLE IF EXISTS `order_processed`;
 CREATE TABLE IF NOT EXISTS `order_processed` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
@@ -561,7 +576,7 @@ CREATE TABLE IF NOT EXISTS `order_processed` (
   `operation_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `order_processed`
@@ -588,7 +603,9 @@ INSERT INTO `order_processed` (`id`, `order_id`, `quantity`, `operation_id`, `da
 
 --
 -- Stand-in structure for view `order_status`
+-- (See below for the actual view)
 --
+DROP VIEW IF EXISTS `order_status`;
 CREATE TABLE IF NOT EXISTS `order_status` (
 `id` int(11)
 ,`number` varchar(45)
@@ -599,18 +616,20 @@ CREATE TABLE IF NOT EXISTS `order_status` (
 ,`datetime` timestamp
 ,`remain` decimal(33,0)
 );
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `process_sequence`
 --
 
+DROP TABLE IF EXISTS `process_sequence`;
 CREATE TABLE IF NOT EXISTS `process_sequence` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `process_sequence`
@@ -654,6 +673,7 @@ INSERT INTO `process_sequence` (`id`, `name`) VALUES
 -- Table structure for table `stock_discription`
 --
 
+DROP TABLE IF EXISTS `stock_discription`;
 CREATE TABLE IF NOT EXISTS `stock_discription` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `stock_id` int(11) NOT NULL,
@@ -661,7 +681,7 @@ CREATE TABLE IF NOT EXISTS `stock_discription` (
   `used_by` varchar(30) NOT NULL,
   `history` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=101 ;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `stock_discription`
@@ -764,13 +784,14 @@ INSERT INTO `stock_discription` (`id`, `stock_id`, `discription`, `used_by`, `hi
 -- Table structure for table `stock_type`
 --
 
+DROP TABLE IF EXISTS `stock_type`;
 CREATE TABLE IF NOT EXISTS `stock_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `item` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`),
   KEY `id_2` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `stock_type`
@@ -791,13 +812,14 @@ INSERT INTO `stock_type` (`id`, `item`) VALUES
 -- Table structure for table `stock_type_detail`
 --
 
+DROP TABLE IF EXISTS `stock_type_detail`;
 CREATE TABLE IF NOT EXISTS `stock_type_detail` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `stock_typeID` int(11) NOT NULL,
   `detail` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `stock_type_detail`
@@ -813,6 +835,7 @@ INSERT INTO `stock_type_detail` (`id`, `stock_typeID`, `detail`) VALUES
 -- Table structure for table `store_material`
 --
 
+DROP TABLE IF EXISTS `store_material`;
 CREATE TABLE IF NOT EXISTS `store_material` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `supplier` varchar(20) NOT NULL,
@@ -822,7 +845,7 @@ CREATE TABLE IF NOT EXISTS `store_material` (
   `size` varchar(20) NOT NULL DEFAULT 'NA',
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `store_material`
@@ -839,12 +862,13 @@ INSERT INTO `store_material` (`id`, `supplier`, `item`, `color`, `color_code`, `
 -- Table structure for table `store_rack`
 --
 
+DROP TABLE IF EXISTS `store_rack`;
 CREATE TABLE IF NOT EXISTS `store_rack` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `store_id` int(11) NOT NULL,
   `name` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `store_rack`
@@ -860,11 +884,12 @@ INSERT INTO `store_rack` (`id`, `store_id`, `name`) VALUES
 -- Table structure for table `store_room`
 --
 
+DROP TABLE IF EXISTS `store_room`;
 CREATE TABLE IF NOT EXISTS `store_room` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `store_room`
@@ -880,13 +905,14 @@ INSERT INTO `store_room` (`id`, `name`) VALUES
 -- Table structure for table `store_stock`
 --
 
+DROP TABLE IF EXISTS `store_stock`;
 CREATE TABLE IF NOT EXISTS `store_stock` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `store_rack_id` int(11) NOT NULL,
   `store_material_id` int(11) NOT NULL,
   `quentity` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -894,13 +920,14 @@ CREATE TABLE IF NOT EXISTS `store_stock` (
 -- Table structure for table `styles`
 --
 
+DROP TABLE IF EXISTS `styles`;
 CREATE TABLE IF NOT EXISTS `styles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `styles`
@@ -930,6 +957,7 @@ INSERT INTO `styles` (`id`, `name`, `datetime`) VALUES
 -- Table structure for table `tna`
 --
 
+DROP TABLE IF EXISTS `tna`;
 CREATE TABLE IF NOT EXISTS `tna` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -937,7 +965,7 @@ CREATE TABLE IF NOT EXISTS `tna` (
   `endday` int(11) NOT NULL,
   `department` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tna`
@@ -990,6 +1018,7 @@ INSERT INTO `tna` (`id`, `name`, `startday`, `endday`, `department`) VALUES
 -- Table structure for table `tna_60`
 --
 
+DROP TABLE IF EXISTS `tna_60`;
 CREATE TABLE IF NOT EXISTS `tna_60` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -997,7 +1026,7 @@ CREATE TABLE IF NOT EXISTS `tna_60` (
   `endday` int(11) NOT NULL,
   `department` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tna_60`
@@ -1050,6 +1079,7 @@ INSERT INTO `tna_60` (`id`, `name`, `startday`, `endday`, `department`) VALUES
 -- Table structure for table `tna_80`
 --
 
+DROP TABLE IF EXISTS `tna_80`;
 CREATE TABLE IF NOT EXISTS `tna_80` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -1057,7 +1087,7 @@ CREATE TABLE IF NOT EXISTS `tna_80` (
   `endday` int(11) NOT NULL,
   `department` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tna_80`
@@ -1109,6 +1139,7 @@ INSERT INTO `tna_80` (`id`, `name`, `startday`, `endday`, `department`) VALUES
 -- Table structure for table `tna_task`
 --
 
+DROP TABLE IF EXISTS `tna_task`;
 CREATE TABLE IF NOT EXISTS `tna_task` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
@@ -1120,7 +1151,7 @@ CREATE TABLE IF NOT EXISTS `tna_task` (
   `finish_date` date DEFAULT NULL,
   `department` varchar(12) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=77 ;
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tna_task`
@@ -1202,7 +1233,45 @@ INSERT INTO `tna_task` (`id`, `name`, `fixed_date`, `Day`, `Order_Number`, `comp
 (73, 'INSPECTION REQUEST ', '2018-07-13', 'Friday', '87801', 0, '', NULL, '{1,4}\n'),
 (74, 'FINAL INSPECTION DATE', '2018-07-16', 'Monday', '87801', 0, '', NULL, '{1,4,5}\n'),
 (75, 'EX-FACTORY', '2018-07-17', 'Tuesday', '87801', 0, '', NULL, '{1,4,5}\n'),
-(76, 'handover', '2018-07-20', 'Friday', '87801', 0, '', NULL, '{1,4,5,6}\n');
+(76, 'handover', '2018-07-20', 'Friday', '87801', 0, '', NULL, '{1,4,5,6}\n'),
+(77, 'ORIGINAL SAMPLE GIVEN', '2018-05-02', 'Wednesday', 'on123', 0, '', NULL, '{1}'),
+(78, 'FABRIC QUALITY GIVEN', '2018-05-02', 'Wednesday', 'on123', 0, '', NULL, '{1}'),
+(79, 'COLOR STANDARD GIVEN', '2018-05-02', 'Wednesday', 'on123', 0, '', NULL, '{1}'),
+(80, 'FABRIC QLTY SUBMISSION', '2018-05-03', 'Thursday', 'on123', 0, '', NULL, '{1,3}'),
+(81, 'FABRIC QUALITY APPROVAL', '2018-05-07', 'Monday', 'on123', 0, '', NULL, '{1,3}'),
+(82, 'GREIGE FABRIC ORDER', '2018-05-07', 'Monday', 'on123', 0, '', NULL, '{1,3}'),
+(83, 'LAB DIPS/STRIKE-OFF SUB', '2018-05-16', 'Wednesday', 'on123', 0, '', NULL, '{1,3}'),
+(84, 'LAB DIPS/STRIKE-OFF APPRVL', '2018-05-21', 'Monday', 'on123', 0, '', NULL, '{1,3}'),
+(85, 'INITIAL OF BULK SUBMISSION', '2018-06-05', 'Tuesday', 'on123', 0, '', NULL, '{1,3}'),
+(86, 'INITIAL OF BULK APPROVAL', '2018-06-11', 'Monday', 'on123', 0, '', NULL, '{1,3}'),
+(87, 'FINAL BULK IN HOUSE', '2018-06-19', 'Tuesday', 'on123', 0, '', NULL, '{3}'),
+(88, 'BULK LOTS SUBMISSION', '2018-06-20', 'Wednesday', 'on123', 0, '', NULL, '{1,3}'),
+(89, 'BULK LOTS APPROVAL', '2018-06-25', 'Monday', 'on123', 0, '', NULL, '{1,3}'),
+(90, 'FABRIC INSPECTION DATE', '2018-06-26', 'Tuesday', 'on123', 0, '', NULL, '{1,3}'),
+(91, 'FPT REPORT/GPT ', '2018-06-13', 'Wednesday', 'on123', 0, '', NULL, '{1}'),
+(92, 'MAIN LABEL IN HOUSE', '2018-05-16', 'Wednesday', 'on123', 0, '', NULL, '{1,7}'),
+(93, 'PRICE TAGS AND BARCODES', '2018-05-16', 'Wednesday', 'on123', 0, '', NULL, '{1,7}'),
+(94, 'WASH CARE LABEL', '2018-05-16', 'Wednesday', 'on123', 0, '', NULL, '{1,7}'),
+(95, 'Other Trims/ Material', '2018-05-16', 'Wednesday', 'on123', 0, '', NULL, '{1,7}'),
+(96, 'SPEC RECEIVED DATE', '2018-05-02', 'Wednesday', 'on123', 0, '', NULL, '{1}'),
+(97, '1ST FIT SUBMISSION', '2018-05-14', 'Monday', 'on123', 0, '', NULL, '{1,2}'),
+(98, '1ST FIT COMMENTS', '2018-05-17', 'Thursday', 'on123', 0, '', NULL, '{1,2}'),
+(99, '2ND FIT SUBMISSION', '2018-05-24', 'Thursday', 'on123', 0, '', NULL, '{1,2}'),
+(100, '2ND FIT APPROVAL', '2018-05-28', 'Monday', 'on123', 0, '', NULL, '{1,2}'),
+(101, 'SIZE SET SUBMISSION (Internal ', '2018-05-14', 'Monday', 'on123', 0, '', NULL, '{1,2}'),
+(102, 'SIZE SET APPROVAL', '2018-05-18', 'Friday', 'on123', 0, '', NULL, '{1,2}'),
+(103, 'PP SUBMISSION ', '2018-06-16', 'Saturday', 'on123', 0, '', NULL, '{1,2}'),
+(104, 'PP SAMPLE APPROVAL', '2018-06-21', 'Thursday', 'on123', 0, '', NULL, '{1,2}'),
+(105, 'SHIPMENT SAMPLE SUBMISSION', '2018-07-16', 'Monday', 'on123', 0, '', NULL, '{1,2,4}'),
+(106, 'SHIPMENT SAMPLE APPROVAL', '2018-07-20', 'Friday', 'on123', 0, '', NULL, '{1,4}'),
+(107, 'TRIM CARD', '2018-06-18', 'Monday', 'on123', 0, '', NULL, '{1}'),
+(108, 'TEST REPORT', '2018-06-12', 'Tuesday', 'on123', 0, '', NULL, '{1}'),
+(109, 'PRODUCTION CUT DATE', '2018-06-22', 'Friday', 'on123', 0, '', NULL, '{1,4}'),
+(110, 'DCMNT,SHORTG,APPROVAL', '2018-07-18', 'Wednesday', 'on123', 0, '', NULL, '{1,4,5,6}'),
+(111, 'INSPECTION REQUEST ', '2018-07-19', 'Thursday', 'on123', 0, '', NULL, '{1,4}'),
+(112, 'FINAL INSPECTION DATE', '2018-07-21', 'Saturday', 'on123', 0, '', NULL, '{1,4,5}'),
+(113, 'EX-FACTORY', '2018-07-23', 'Monday', 'on123', 0, '', NULL, '{1,4,5}'),
+(114, 'handover', '2018-07-26', 'Thursday', 'on123', 0, '', NULL, '{1,4,5,6}');
 
 -- --------------------------------------------------------
 
@@ -1210,6 +1279,7 @@ INSERT INTO `tna_task` (`id`, `name`, `fixed_date`, `Day`, `Order_Number`, `comp
 -- Table structure for table `user_work`
 --
 
+DROP TABLE IF EXISTS `user_work`;
 CREATE TABLE IF NOT EXISTS `user_work` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `work_id` int(11) NOT NULL,
@@ -1218,7 +1288,7 @@ CREATE TABLE IF NOT EXISTS `user_work` (
   `email` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_work`
@@ -1235,6 +1305,7 @@ INSERT INTO `user_work` (`id`, `work_id`, `user`, `password`, `email`) VALUES
 -- Table structure for table `work`
 --
 
+DROP TABLE IF EXISTS `work`;
 CREATE TABLE IF NOT EXISTS `work` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date` date NOT NULL,
@@ -1246,7 +1317,7 @@ CREATE TABLE IF NOT EXISTS `work` (
   `byuser_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=195 ;
+) ENGINE=InnoDB AUTO_INCREMENT=195 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `work`
@@ -1386,7 +1457,7 @@ INSERT INTO `work` (`id`, `date`, `start_time`, `end_time`, `work`, `complete`, 
 (191, '2018-05-02', '2018-05-02 05:10:11', '2018-05-02 05:13:04', 'Archana PDF not open', 1, 0, 3),
 (192, '2018-05-03', '2018-05-03 04:50:03', '2018-05-03 04:56:47', 'internet not working', 1, 0, 3),
 (193, '2018-05-03', '2018-05-03 05:26:55', '2018-05-03 05:28:34', 'Ashok wifi problem', 1, 0, 3),
-(194, '2018-05-03', '2018-05-03 06:27:06', '2018-05-03 06:27:06', 'monosprit costing sheet', 0, 0, 3);
+(194, '2018-05-03', '2018-05-03 06:27:06', '2018-05-02 21:17:39', 'monosprit costing sheet', 1, 0, 3);
 
 -- --------------------------------------------------------
 
@@ -1394,13 +1465,14 @@ INSERT INTO `work` (`id`, `date`, `start_time`, `end_time`, `work`, `complete`, 
 -- Table structure for table `work_answer`
 --
 
+DROP TABLE IF EXISTS `work_answer`;
 CREATE TABLE IF NOT EXISTS `work_answer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `work_id` int(11) NOT NULL,
   `comment` varchar(400) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=111 ;
+) ENGINE=InnoDB AUTO_INCREMENT=112 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `work_answer`
@@ -1426,12 +1498,12 @@ INSERT INTO `work_answer` (`id`, `work_id`, `comment`) VALUES
 (17, 103, 'completed all process and veryfi EPP auth code also.\r\nnow last and final approvel from hostelevator + domain registrar controller pending its take upto 7days process period. \r\n\r\n \r\n'),
 (18, 106, 'hang computer problem fixed by uninstall unused tools and software .'),
 (19, 107, ' cheque and adharcard printing'),
-(20, 108, 'Your current Registrar needs to approve your domain name''s transfer. Please wait while this transfer request is processed.'),
+(20, 108, 'Your current Registrar needs to approve your domain name\'s transfer. Please wait while this transfer request is processed.'),
 (21, 109, 'every thing is fine and help for color print for File. '),
 (22, 111, 'ok completed '),
 (23, 110, 'done after small setting in outook all mails are receive in sunaina laptop. '),
 (24, 112, 'understand process'),
-(25, 113, 'drop request mail to compliance@publicdomainregistry.com ,\r\n\r\nYour current Registrar needs to approve your domain name''s transfer. Please wait while this transfer request is processed.'),
+(25, 113, 'drop request mail to compliance@publicdomainregistry.com ,\r\n\r\nYour current Registrar needs to approve your domain name\'s transfer. Please wait while this transfer request is processed.'),
 (26, 115, 'upgrade from windows xp to 7 migration,\r\n\r\nand upgrade outlook mail and export/import , all printer antivirous setup in mukul computer , \r\n\r\none manual scan is panding.'),
 (27, 114, 'domain transfer completed and all DNS setting/setup completed.  '),
 (28, 116, 'not femilier with windows 7 so need xp back'),
@@ -1515,7 +1587,8 @@ INSERT INTO `work_answer` (`id`, `work_id`, `comment`) VALUES
 (107, 190, 'completed'),
 (108, 191, 'virous Spam from unknown person.. '),
 (109, 192, 'complaint to airtel now completed'),
-(110, 193, 'wifi connect in laptop ');
+(110, 193, 'wifi connect in laptop '),
+(111, 194, 'cost given ');
 
 -- --------------------------------------------------------
 
@@ -1524,7 +1597,7 @@ INSERT INTO `work_answer` (`id`, `work_id`, `comment`) VALUES
 --
 DROP TABLE IF EXISTS `get_work`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `get_work` AS select `work`.`id` AS `id`,`work`.`byuser_id` AS `byuser_id`,`work`.`start_time` AS `start_time`,`work`.`work` AS `work`,`work`.`complete` AS `complete`,timestampdiff(MINUTE,`work`.`start_time`,`work`.`end_time`) AS `ConsumeTime`,`work_answer`.`comment` AS `comment` from (`work` left join `work_answer` on((`work`.`id` = `work_answer`.`work_id`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `get_work`  AS  select `work`.`id` AS `id`,`work`.`byuser_id` AS `byuser_id`,`work`.`start_time` AS `start_time`,`work`.`work` AS `work`,`work`.`complete` AS `complete`,timestampdiff(MINUTE,`work`.`start_time`,`work`.`end_time`) AS `ConsumeTime`,`work_answer`.`comment` AS `comment` from (`work` left join `work_answer` on((`work`.`id` = `work_answer`.`work_id`))) ;
 
 -- --------------------------------------------------------
 
@@ -1533,7 +1606,8 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `order_status`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY INVOKER VIEW `order_status` AS select `order`.`id` AS `id`,`order`.`number` AS `number`,`order`.`color` AS `color`,`order`.`size` AS `size`,`order`.`quantity` AS `Total Order`,sum(`order_processed`.`quantity`) AS `completed`,`order`.`datetime` AS `datetime`,(`order`.`quantity` - sum(`order_processed`.`quantity`)) AS `remain` from (`order` join `order_processed` on((`order_processed`.`order_id` = `order`.`id`))) where (`order_processed`.`operation_id` = 1) group by `order_processed`.`order_id`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY INVOKER VIEW `order_status`  AS  select `order`.`id` AS `id`,`order`.`number` AS `number`,`order`.`color` AS `color`,`order`.`size` AS `size`,`order`.`quantity` AS `Total Order`,sum(`order_processed`.`quantity`) AS `completed`,`order`.`datetime` AS `datetime`,(`order`.`quantity` - sum(`order_processed`.`quantity`)) AS `remain` from (`order` join `order_processed` on((`order_processed`.`order_id` = `order`.`id`))) where (`order_processed`.`operation_id` = 1) group by `order_processed`.`order_id` ;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
