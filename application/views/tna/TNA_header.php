@@ -283,7 +283,9 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                       
+                       <li>
+                            <a href="<?php echo site_url('Order/view_allorder'); ?>"><i class="fa fa-table fa-fw"></i> View All Orders</a>
+                        </li>
                         <li>
                             <a href="<?php echo site_url('Auth/site_map'); ?>"><i class="fa fa-table fa-fw"></i> Site Map</a>
                         </li>
