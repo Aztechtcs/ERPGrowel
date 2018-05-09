@@ -38,6 +38,7 @@ $size=array_unique($size);
 <?php 
 echo form_open();
 echo form_hidden('operation_id',1);
+
 //foreach($ar as $v){
 //    echo form_input($v->id,'','placeholder ='.$v->id.'/'.$v->size.'/'.$v->color)."<br>";
 //}
@@ -47,7 +48,7 @@ echo form_hidden('operation_id',1);
                     
                     
                     
-                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example" ng-app="myApp" ng-controller="myCtrl">
+                    <table width="100%" class="table table-striped table-bordered table-hover" ng-app="myApp" ng-controller="myCtrl">
                         <thead>
                             <tr>
 
@@ -71,7 +72,7 @@ echo form_hidden('operation_id',1);
                                 <div class="form-group input-group">
                                     <?php /*<input type="text" class="form-control" required placeholder="{{x.buyer_name}} / {{x.number}} / {{x.Style_id}} / {{x.color}} / {{x.size}}">
                                     */ ?>
-                                    <input class="form-control " type="text" name="color[]" placeholder="Red Orange" required>
+                                    <input class="form-control " type="number" name="{{x.id}}" placeholder="{{x.Style_id}} / {{x.color}} / {{x.size}} /{{x.buyer_name}}:{{x.number}} /" required>
                                     <span class="input-group-addon">.00</span>
                                 </div>
    

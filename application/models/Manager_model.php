@@ -178,7 +178,7 @@ CONSTRAINT `FK_124` FOREIGN KEY `fkIdx_124` (`order_id`) REFERENCES `SampleDb`.`
  * SELECT `order`.`id`,`order`.`number`,`order`.`color`,`order`.`size`,`order`.`quantity`,sum(`order_processed`.`quantity`) as `completed`,`order`.`datetime` ,`order`.`quantity`- sum(`order_processed`.`quantity`)as 'remail' FROM `order` join `order_processed` on `order_processed`.`order_id`=`order`.`id` where `order_processed`.`operation_id` =1 group by `order_processed`.`order_id`
  */
 
-class manager_model extends CI_Model{
+class Manager_model extends CI_Model{
     function __construct(){
 	parent::__construct();
 	ini_set('date.timezone', 'Asia/Kolkata');
@@ -186,6 +186,15 @@ class manager_model extends CI_Model{
     
     function get_style(){
         
+    }
+    
+    function insert_report($data){
+        if($this->db->insert('order_processed',$data)){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     
     function get_order($id,$op_id=null){

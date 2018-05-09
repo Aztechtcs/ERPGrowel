@@ -28,6 +28,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $this->load->library('Zend');?>
                             <tr class="odd gradeX" ng-repeat="x in records">
                                 <td>{{x.buyer_name}}</td>
                                 <td>{{x.Style_id}}</td>
@@ -35,10 +36,11 @@
                                 <th>{{x.color}}</th>
                                 <td>{{x.size}}</td>
                                 <td>{{x.quantity}}</td>
-                                <td><a href="<?php echo site_url('Order/insrt/');?>{{x.id}}" ><p class="fa fa-scissors"></p></a>
-                                 ----- <a href="<?php echo site_url('Order/insrt/');?>{{x.id}}" ><p class="fa fa-users"></p></a>
+                                <td><a href="<?php echo site_url('Order/insert_report/');?>{{x.number}}/1" ><p class="fa fa-scissors"></p></a>
+                                 ----- <a href="<?php echo site_url('Order/insert_report/');?>{{x.number}}/2" ><p class="fa fa-users"></p></a>
                                 
                                 </td>
+                               
                               <?php /*  <td class="center">{{x.fixed_date}}</td>
                                 <td class="center"><a href="<?php echo site_url('Tna/click_complete/');?>{{x.id}}" ><button type="button" class="btn btn-default btn-circle"><i class="fa fa-check"></i>
                                         </button> */ ?>

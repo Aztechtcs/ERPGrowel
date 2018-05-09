@@ -22,7 +22,7 @@ class Order extends CI_Controller {
     public function __construct() {
         parent::__construct();
             $this->load->database('test');
-            //$this->load->model(array('work','Extra_work','manager_model'));
+            //$this->load->model(array('work','Extra_work','Manager_model'));
             $this->load->helper(array('text','form'));
             $this->load->library(array('form_validation','table'));
             $this->session;    
@@ -81,16 +81,44 @@ class Order extends CI_Controller {
         redirect('Order/put_detail');
     }
     
+    function view_report(){
+        
+    }
+    
     function insert_report($id=null,$op_id=null){
-        $this->load->model(array('manager_model'));
-        $sal['ar']= $this->manager_model->get_order($id,$op_id);
+        $this->load->model(array('Manager_model'));
+        if($this->input->post('Submit')){
+           
+            $all=$this->input->post();
+            unset($all['Submit']);
+            unset($all['operation_id']);
+            //var_dump($all);
+            $html="<h2>Operation ".$this->input->post('operation_id')." Complete Report</h2>\n";
+            foreach($all as $k=>$v){
+                $newentry=array(
+                    'operation_id'=>$this->input->post('operation_id'),
+                    'order_id'=>$k,
+                    'quantity'=>$v
+                );
+                if($this->Manager_model->insert_report($newentry)){
+                 $html.=var_dump($newentry);
+                }
+                
+                //$this->Manager_model->insert_report($newentry);
+                var_dump($newentry);
+            }
+            $this->mailsent($html);
+            
+        }
+        
+        $sal['ar']= $this->Manager_model->get_order($id,$op_id);
         $this->load->view('order/insert_report',$sal);
     }
     
     function view_allorder(){
-        $this->load->model(array('manager_model'));
+        $this->load->model(array('Manager_model'));
         $this->load->library('table');
-        $table=$this->manager_model->view_allorder();
+        $table=$this->Manager_model->view_allorder();
         $re['json']= json_encode($table->result());
         $this->load->view('order/view_allorder',$re);
         //$this->load->view('manager/view_allorder',$re);
@@ -98,7 +126,7 @@ class Order extends CI_Controller {
     
     
     function put_detail(){
-        $this->load->model(array('manager_model','Tna_model','Extra_work'));
+        $this->load->model(array('Manager_model','Tna_model','Extra_work'));
        /* if($this->input->post('get_template')){
             $Content = "Name,address,mobileno,email\n";
             $FileName = "Myfile-".date("d-m-y-h:i:s").".csv";
@@ -123,7 +151,7 @@ class Order extends CI_Controller {
             $table=array();
             while(sizeof($color)>$c){
                 array_push($table, array($order_number,ucfirst($color[$c]) ,ucfirst($size[$c]),$quantity[$c],$Style_id,$buyer_name));
-                $this->manager_model->add_order(array('number'=>$order_number,'color'=>ucfirst($color[$c]),'size'=>ucfirst($size[$c]),'quantity'=>$quantity[$c],'Style_id'=>$Style_id,'buyer_name'=>$buyer_name));
+                $this->Manager_model->add_order(array('number'=>$order_number,'color'=>ucfirst($color[$c]),'size'=>ucfirst($size[$c]),'quantity'=>$quantity[$c],'Style_id'=>$Style_id,'buyer_name'=>$buyer_name));
                 $c++;
             }
             

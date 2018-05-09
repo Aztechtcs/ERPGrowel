@@ -87,8 +87,8 @@ if ($err) {
                $message= 'Hi '.$monlst->name.' Good Morning '.$this->Alert_model->quote();
              }else{
                $message='Hi '.$monlst->name.', '. sizeof($task_list).' Pending Work for you Click '.site_url('Alert/tl/').$v->rbd.'/'.$v->id.' ';
-            //$r="testdemo";
-            $r=$this->sent_message($message,$monlst->phone);
+            $r="testdemo";
+            //$r=$this->sent_message($message,$monlst->phone);
             $M='{"'.$r.'"},{"'.$monlst->phone.'"},{"'.$message.'"}';
             $this->Alert_model->alert_log($M);
             echo $monlst->phone.$message;   
@@ -144,7 +144,8 @@ if ($err) {
     //$message="SORRY Please Ignore the above message Logical mistake . ";
     
     foreach($mobile as $mob){
-         $r=$this->sent_message($message,$mob->phone);
+        // $r=$this->sent_message($message,$mob->phone);
+        $r="test";
          $M='{'.$r.'},{'.$mob->phone.'},{'.$message.'}';
          $this->Alert_model->alert_log($M);
     }
