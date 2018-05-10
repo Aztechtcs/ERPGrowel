@@ -95,11 +95,12 @@ if ($err) {
              }
          }
         // var_dump($v);
-         //var_dump($mobiles);
-         //var_dump($task_list);   
+        //var_dump($mobiles);
+        //var_dump($task_list);   
      }
-     //var_dump($depart);
+        //var_dump($depart);
  }
+ 
  
  function reminder(){
      $mobile=$this->get_mobile();
