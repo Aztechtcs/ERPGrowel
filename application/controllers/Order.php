@@ -82,21 +82,30 @@ class Order extends CI_Controller {
     }
     
     function view_report(){
-        
+        $this->load->model(array('Manager_model'));
+        $report=$this->Manager_model->current_order_status();
+        //return $report->result();
+        $db['json']= json_encode($report);
+        $this->load->view('order/current_status',$db);
+    }
+    
+    function log($id=null){
+        $this->load->model(array('Manager_model'));
+        $d['json']=json_encode($this->Manager_model->log($id));
+        $this->load->view('order/log_detail',$d);
     }
     
     function insert_report($id=null,$op_id=null){
         $this->load->model(array('Manager_model'));
         if($this->input->post('Submit')){
-           
             $all=$this->input->post();
             unset($all['Submit']);
             unset($all['operation_id']);
             //var_dump($all);
-            $html="<h2>Operation ".$this->input->post('operation_id')." Complete Report</h2>\n";
+            $html="<h2>Operation ".$this->Manager_model->get_opname($this->input->post('operation_id'))." Complete Report</h2>\n";
             foreach($all as $k=>$v){
                 $newentry=array(
-                    'operation_id'=>$this->input->post('operation_id'),
+                    'operation_id'=>$op_id,
                     'order_id'=>$k,
                     'quantity'=>$v
                 );
@@ -108,10 +117,9 @@ class Order extends CI_Controller {
                 var_dump($newentry);
             }
             $this->mailsent($html);
-            
         }
-        
         $sal['ar']= $this->Manager_model->get_order($id,$op_id);
+        $sal['operation']=$this->Manager_model->get_opname($op_id);
         $this->load->view('order/insert_report',$sal);
     }
     

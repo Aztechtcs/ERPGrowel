@@ -253,11 +253,34 @@ from (`order` join `order_processed` on((`order_processed`.`order_id` = `order`.
     private function add_style($d){
         $this->db->insert('styles',$d);
            // return true;
-        
     }
+    
+    
+    function current_order_status(){
+        $re=$this->db->get('order_status');
+        return $re->result();
+    }
+    
+    function log($id){
+        $this->db->select('`order`.`id`,`order`.`number`,`order`.`color`,`order`.`size`,`order_processed`.`quantity`,`operation`.`name` ,`order_processed`.`datetime`');
+        $this->db->join('order','`order_processed`.`order_id`=`order`.`id`');
+        $this->db->join('operation','`operation`.`id`=`order_processed`.`operation_id`');
+        $this->db->order_by('`order`.`datetime`');
+        $r=$this->db->get_where('order_processed',array('`order`.`id`'=>$id));
+       // $r=$this->db->query('SELECT `order`.`id`,`order`.`number`,`order`.`color`,`order`.`size`,`order_processed`.`quantity`,`operation`.`name` ,`order`.`datetime` FROM `order_processed` JOIN `order` on `order_processed`.`order_id`=`order`.`id` JOIN `operation` on `operation`.`id`=`order_processed`.`operation_id` ORDER BY `order`.`datetime` DESC');
+        return $r->result();
+    }
+    
    function view_allorder(){
        $this->db->select('*')->from('order')->order_by("id", "desc");
        return $this->db->get();
+   }
+   
+   function get_opname($id){
+       $this->db->select('name');
+       $re=$this->db->get_where('operation',array('id'=>$id));
+       $res= $re->result();
+       return $res[0]->name;
    }
    
     function get_stylebyid($data){
