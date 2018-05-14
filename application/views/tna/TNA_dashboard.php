@@ -99,10 +99,10 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart Example
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Daily Production Chart 7 Days
                             <div class="pull-right">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -245,7 +245,7 @@
                             <ul class="chat">
                                 <li class="left clearfix">
                                     <span class="chat-img pull-left">
-                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
+                                        <img src="#" alt="User Avatar" class="img-circle" />
                                     </span>
                                     <div class="chat-body clearfix">
                                         <div class="header">
@@ -261,7 +261,7 @@
                                 </li>
                                 <li class="right clearfix">
                                     <span class="chat-img pull-right">
-                                        <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
+                                        <img src="#" alt="User Avatar" class="img-circle" />
                                     </span>
                                     <div class="chat-body clearfix">
                                         <div class="header">
@@ -276,7 +276,7 @@
                                 </li>
                                 <li class="left clearfix">
                                     <span class="chat-img pull-left">
-                                        <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
+                                        <img src="#" alt="User Avatar" class="img-circle" />
                                     </span>
                                     <div class="chat-body clearfix">
                                         <div class="header">
@@ -291,7 +291,7 @@
                                 </li>
                                 <li class="right clearfix">
                                     <span class="chat-img pull-right">
-                                        <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
+                                        <img src="#" alt="User Avatar" class="img-circle" />
                                     </span>
                                     <div class="chat-body clearfix">
                                         <div class="header">
@@ -342,8 +342,10 @@
     <!-- Morris Charts JavaScript -->
     <script src="<?php echo site_url('assets/startbootstrap-admin'); ?>/vendor/raphael/raphael.min.js"></script>
     <script src="<?php echo site_url('assets/startbootstrap-admin'); ?>/vendor/morrisjs/morris.min.js"></script>
-    <script src="<?php echo site_url('assets/startbootstrap-admin'); ?>/data/morris-data.js"></script>
-
+<!--    <script src="<?php //echo site_url('assets/startbootstrap-admin'); ?>/data/morris-data.js"></script>-->
+    <script>
+    <?php $this->load->view('manager/morris-data'); ?>
+    </script>
     <!-- Custom Theme JavaScript -->
     <script src="<?php echo site_url('assets/startbootstrap-admin'); ?>/dist/js/sb-admin-2.js"></script>
 <script src="<?php echo site_url('assets/angular.min.js'); ?>" ></script>

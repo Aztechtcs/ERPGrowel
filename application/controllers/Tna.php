@@ -22,7 +22,7 @@ class Tna extends CI_Controller {
     public function __construct() {
         parent::__construct();
             $this->load->database('test');
-            $this->load->model(array('work','Extra_work','manager_model','Tna_model'));
+            $this->load->model(array('work','Extra_work','Manager_model','Tna_model'));
             $this->load->helper(array('text','form'));
             $this->load->library(array('form_validation','table'));
             //$this->load->library('My_PHPMailer');
@@ -32,6 +32,12 @@ class Tna extends CI_Controller {
     
     function dashboard(){
         $this->load->view('tna/TNA_dashboard');
+    }
+    
+    function test(){
+        $r=$this->Manager_model->all_report();
+        $this->load->view('tna/TNA_dashboard');
+        echo $r;
     }
     
     function get_completedtask(){

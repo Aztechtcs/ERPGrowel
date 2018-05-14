@@ -45,6 +45,12 @@ class Order extends CI_Controller {
         $this->email->reply_to('nasir@programmer.net', 'Nasiruddin');
     }
     
+    
+    function requirement($style=null){
+        $this->load->model(array('Manager_model'));
+        echo "hello word";
+    }
+    
     function mailsent($html=null){
         $to=array('ph9716942965@gmail.com');
         foreach($to as $v){

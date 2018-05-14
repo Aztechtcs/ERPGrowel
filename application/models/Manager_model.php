@@ -208,6 +208,13 @@ class Manager_model extends CI_Model{
         return $this->db->get_where('order_processed',array('order_id'=>$order_id,'operation_id'=>$operation_id));
     }
     
+    function all_report(){
+        $q="SELECT `id`,`order_id`,sum(if(`operation_id`=1,`quantity`,0)) `cutting`, sum(if(`operation_id`=2,`quantity`,0)) `swing` ,LEFT(`datetime` , 10) as `datetime` FROM `order_processed` WHERE `datetime` > DATE_SUB(DATE(NOW()), INTERVAL 7 DAY) group by LEFT(`datetime` , 10)";
+        $r= $this->db->query($q);
+        $re=$r->result();
+        return json_encode($re);
+    }
+    
     function explore_order($order_id,$operationid=null){
         if($operationid==null){$operationid=1;}
         $q='select `order`.`id` AS `id`,
