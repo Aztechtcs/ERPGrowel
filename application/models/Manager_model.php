@@ -216,7 +216,7 @@ class Manager_model extends CI_Model{
     }
     
         function all_report_daily(){//FOR MORRICE JS Graph
-        $q="SELECT `id`,`order_id`,sum(if(`operation_id`=1,`quantity`,0)) `cutting`, sum(if(`operation_id`=2,`quantity`,0)) `swing` ,LEFT(`datetime` , 13) as `datetime` FROM `order_processed` WHERE `datetime` > DATE_SUB(DATE(NOW()), INTERVAL 1 DAY) group by LEFT(`datetime` , 13)";
+        $q="SELECT `id`,`order_id`,sum(if(`operation_id`=1,`quantity`,0)) `cutting`, sum(if(`operation_id`=2,`quantity`,0)) `swing` ,LEFT(RIGHT(`datetime`,11) , 5) as `datetime` FROM `order_processed` WHERE `datetime` > DATE_SUB(DATE(NOW()), INTERVAL 1 DAY) group by LEFT(RIGHT(`datetime`,11) , 5)";
         $r= $this->db->query($q);
         $re=$r->result();
         return json_encode($re);

@@ -39,6 +39,16 @@ class Order extends CI_Controller {
             'mailtype'  => 'html',
             'charset'   => 'utf-8'
         );
+        $config = array(
+            'protocol'  => 'smtp',
+            'smtp_host' => 'smtpauth.growelimpex.com.',
+            'smtp_port' => 587,
+            'smtp_crypto'=>'tls', 
+            'smtp_user' => 'archana@growelimpex.com',
+            'smtp_pass' => 'growel@123',
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8'
+        );
         $this->email->initialize($config);
         $this->email->set_mailtype("html");
         $this->email->set_newline("\r\n");
@@ -61,7 +71,7 @@ class Order extends CI_Controller {
                 $htmlContent .= '<p>This email has sent via SMTP server from CodeIgniter application.</p>';
             }
         $this->email->to($v);
-        $this->email->from('nasir@growelimpex.com','Growel Impex');
+        $this->email->from('archana@growelimpex.com','Growel Impex');
         $this->email->subject('How to send email via SMTP server in CodeIgniter');
         $this->email->message($htmlContent);
         //Send email
