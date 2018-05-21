@@ -43,6 +43,18 @@ class Manager extends CI_Controller {
        $this->load->view('part_header',$d);
     }
     
+    
+    function order_po($num){
+        if($num<=1){
+            return $num;
+        }else{
+            $feb='';
+            $first=0;
+            $secont=1;
+            
+        }
+    }
+    
     function status_entry($id=null){
         if($id==null){
             redirect('Manager/list_order');

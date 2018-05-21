@@ -27,10 +27,10 @@ class Auth extends CI_Controller {
 		 $this->load->helper('text');
                  $this->load->helper('form');
                  $this->load->library('form_validation');
-                 $this->session;
-                 
-                
+                // $this->load->library('Auther');
+                 $this->session;         
     }
+    
     function complaints(){
         $this->load->view('workshedule/add_complaints');
     }
